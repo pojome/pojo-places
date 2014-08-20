@@ -126,8 +126,10 @@ module.exports = function( grunt ) {
 			options: {},
 			dist: {
 				files: {
-					'assets/js/scripts.min.js': [
-						'assets/js/dev/scripts.dev.js'
+					'assets/js/app.min.js': [
+						'assets/js/dev/utils/google-api.js',
+						'assets/js/dev/views/AppView.js',
+						'assets/js/dev/app.js'
 					]
 				}
 			}

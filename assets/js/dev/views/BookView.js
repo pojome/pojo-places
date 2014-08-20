@@ -1,18 +1,16 @@
-var myApp = myApp || {};
-myApp.views = myApp.views || {};
+var pojoPlaces = pojoPlaces || {};
+pojoPlaces.views = pojoPlaces.views || {};
 
 ( function( $ ) {
 	'use strict';
 
-	myApp.views.BookView = Backbone.View.extend( {
+	pojoPlaces.views.BookView = Backbone.View.extend( {
 		tagName: 'li',
 
 		template: '',
 
 		events: {
-			'click a.btn-remove': 'removeBook',
-			'click a.btn-clone': 'cloneBook',
-			'dblclick': 'editBook'
+			
 		},
 
 		initialize: function() {
@@ -41,7 +39,8 @@ myApp.views = myApp.views || {};
 		
 		cloneBook: function( e ) {
 			e.preventDefault();
-			myApp.main.collection.add( this.model.clone() );
+			pojoPlaces.main.collection.add( this.model.clone() );
+			
 		},
 
 		editBook: function() {

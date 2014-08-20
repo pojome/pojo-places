@@ -1,12 +1,12 @@
 /* global Backbone, jQuery */
 
-var myApp = myApp || {};
-myApp.views = myApp.views || {};
+var pojoPlaces = pojoPlaces || {};
+pojoPlaces.views = pojoPlaces.views || {};
 
 ( function( $ ) {
 	'use strict';
 	
-	myApp.views.LibraryView = Backbone.View.extend( {
+	pojoPlaces.views.LibraryView = Backbone.View.extend( {
 		el: '#my-app',
 		
 		template: '',
@@ -22,7 +22,7 @@ myApp.views = myApp.views || {};
 			
 			self.template = _.template( $( '#tmpl-book-row' ).html() );
 			
-			self.collection = new myApp.collections.Library();
+			self.collection = new pojoPlaces.collections.Library();
 			self.listenTo( self.collection, 'add', self.addBook );
 			
 			self.collection.add( {
@@ -44,7 +44,7 @@ myApp.views = myApp.views || {};
 		},
 
 		addBook: function( model, models, options ) {
-			var view = new myApp.views.BookView( { model: model } );
+			var view = new pojoPlaces.views.BookView( { model: model } );
 			
 			this.$list.append(view.render().el);
 		},
