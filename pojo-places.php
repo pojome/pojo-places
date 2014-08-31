@@ -85,7 +85,7 @@ final class Pojo_Places {
 	}
 
 	public function admin_notices() {
-		echo '<div class="error"><p>' . sprintf( __( '<a href="%s" target="_blank">Pojo Framework</a> is not active. Please activate any theme by Pojo before you are using "Pojo Places" plugin.', 'pojo-lightbox' ), 'http://pojo.me/' ) . '</p></div>';
+		echo '<div class="error"><p>' . sprintf( __( '<a href="%s" target="_blank">Pojo Framework</a> is not active. Please activate any theme by Pojo before you are using "Pojo Places" plugin.', 'pojo-places' ), 'http://pojo.me/' ) . '</p></div>';
 	}
 
 	public function print_google_maps() {
@@ -95,10 +95,8 @@ final class Pojo_Places {
 	}
 
 	public function enqueue_scripts() {
-		wp_register_script( 'pojo-places', POJO_PLACES_ASSETS_URL . 'js/app.min.js', array( 'jquery', 'underscore', 'backbone' ), false, true );
+		wp_register_script( 'pojo-places', POJO_PLACES_ASSETS_URL . 'js/app.min.js', array( 'jquery' ), false, true );
 		
-		wp_enqueue_script( 'underscore' );
-		wp_enqueue_script( 'backbone' );
 		wp_enqueue_script( 'pojo-places' );
 	}
 
@@ -125,4 +123,4 @@ final class Pojo_Places {
 
 Pojo_Places::instance();
 
-// EOF/ EOF
+// EOF/ EOF/ EOF/ EOF

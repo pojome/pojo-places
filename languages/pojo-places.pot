@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-places 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-20 14:03+0300\n"
+"POT-Creation-Date: 2014-08-22 10:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: pojo-places.php:63 pojo-places.php:74
+#: pojo-places.php:62 pojo-places.php:73
 msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: pojo-places.php:88
+#, php-format
+msgid ""
+"<a href=\"%s\" target=\"_blank\">Pojo Framework</a> is not active. Please "
+"activate any theme by Pojo before you are using \"Pojo Places\" plugin."
 msgstr ""

@@ -13,7 +13,7 @@ pojoPlaces.views = pojoPlaces.views || {};
 			'click button.get-geolocation-position': '_getLocationGetPosition'
 		},
 
-		initialize: function () {
+		initialize: function() {
 			var self = this;
 			self.google_api = pojoPlaces.utils.GoogleApi;
 			self.geocoder = new google.maps.Geocoder();

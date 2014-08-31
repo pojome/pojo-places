@@ -1,12 +1,11 @@
 /* global jQuery, google */
 
-var pojoPlaces = pojoPlaces || {};
-pojoPlaces.utils = pojoPlaces.utils || {};
+var Pojo_Places = Pojo_Places || {};
 
 ( function( $ ) {
 	'use strict';
-	
-	pojoPlaces.utils.GoogleApi = {
+
+	Pojo_Places.GoogleApi = {
 		getDistance: function( latitude, longitube, geo_location ) {
 			return ( google.maps.geometry.spherical.computeDistanceBetween( geo_location, this.getLocation( latitude, longitube ) ) / 10 );
 		},
