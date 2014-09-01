@@ -35,8 +35,8 @@ var Pojo_Places_Admin = Pojo_Places_Admin || {};
 
 		buildElements: function() {
 			var self = this;
-			if ( 1 >= self.cache.$addressWrapper.length ) {
-				self.$( 'div.atmb-wrap-fields' ).append( '<div id="pojo-google-map-wrap"></div><div class="atmb-field-row"><button class="button" id="pojo-lookup-location">Preview</button></div>' );
+			if ( 1 <= self.cache.$addressWrapper.length ) {
+				self.$( 'div.atmb-wrap-fields' ).append( '<div class="atmb-field-row"><button class="button" id="pojo-lookup-location">Preview</button></div><div id="pojo-google-map-wrap"></div>' );
 				
 				self.cache.$map = self.$( '#pojo-google-map-wrap' );
 				self.cache.$lookupLocation = self.$( '#pojo-lookup-location' );
