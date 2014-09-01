@@ -117,7 +117,9 @@ module.exports = function( grunt ) {
 			},
 			all: [
 				'Gruntfile.js',
-				'assets/js/dev/scripts.dev.js'
+				'assets/js/dev/utils/google-api.js',
+				'assets/js/dev/app.js',
+				'assets/admin/js/dev/app.js'
 			]
 		},
 
@@ -128,8 +130,10 @@ module.exports = function( grunt ) {
 				files: {
 					'assets/js/app.min.js': [
 						'assets/js/dev/utils/google-api.js',
-						//'assets/js/dev/views/AppView.js',
 						'assets/js/dev/app.js'
+					],
+					'assets/admin/js/app.min.js': [
+						'assets/admin/js/dev/app.js'
 					]
 				}
 			}

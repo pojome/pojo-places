@@ -130,8 +130,8 @@ final class Pojo_Places_CPT {
 		$fields = array();
 
 		$fields[] = array(
-			'id' => 'street',
-			'title' => __( 'Street', 'pojo-places' ),
+			'id' => 'address',
+			'title' => __( 'Address', 'pojo-places' ),
 		);
 
 		$fields[] = array(
@@ -145,8 +145,23 @@ final class Pojo_Places_CPT {
 		);
 
 		$fields[] = array(
+			'id' => 'zipcode',
+			'title' => __( 'Zip', 'pojo-places' ),
+		);
+
+		$fields[] = array(
 			'id' => 'country',
 			'title' => __( 'Country', 'pojo-places' ),
+		);
+
+		$fields[] = array(
+			'id' => 'latitude',
+			'title' => __( 'Latitude', 'pojo-places' ),
+		);
+
+		$fields[] = array(
+			'id' => 'longitude',
+			'title' => __( 'Longitude', 'pojo-places' ),
 		);
 		
 		$meta_boxes[] = array(

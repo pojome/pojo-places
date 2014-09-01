@@ -48,7 +48,7 @@ final class Pojo_Places {
 	public $cpt;
 
 	public function load_textdomain() {
-		load_plugin_textdomain( 'pojo-places', false, basename( dirname( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'pojo-places', false, basename( dirname( POJO_PLACES__FILE__ ) ) . '/languages' );
 	}
 
 	/**
@@ -91,14 +91,34 @@ final class Pojo_Places {
 		echo '<div class="error"><p>' . sprintf( __( '<a href="%s" target="_blank">Pojo Framework</a> is not active. Please activate any theme by Pojo before you are using "Pojo Places" plugin.', 'pojo-places' ), 'http://pojo.me/' ) . '</p></div>';
 	}
 
+	public function is_need_google_maps() {
+		if ( is_admin() ) {
+			global $pagenow;
+			return in_array( $pagenow, array( 'edit.php', 'post.php', 'post-new.php' ) );
+		}
+		
+		return true;
+	}
+
 	public function print_google_maps() {
+		if ( ! $this->is_need_google_maps() )
+			return;
 		?>
-		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true&v=3&libraries=geometry,places&language=iw"></script>
+		<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true&v=3&libraries=geometry,places&language=iw"></script>
 	<?php
 	}
 
 	public function enqueue_scripts() {
 		wp_register_script( 'pojo-places', POJO_PLACES_ASSETS_URL . 'js/app.min.js', array( 'jquery' ), false, true );
+		
+		wp_enqueue_script( 'pojo-places' );
+	}
+
+	public function admin_enqueue_scripts() {
+		wp_register_script( 'pojo-places', POJO_PLACES_ASSETS_URL . 'admin/js/app.min.js', array( 'jquery' ), false, true );
+		
+		if ( ! $this->is_need_google_maps() )
+			return;
 		
 		wp_enqueue_script( 'pojo-places' );
 	}
@@ -113,11 +133,13 @@ final class Pojo_Places {
 		include( 'includes/class-pojo-places-cpt.php' );
 		include( 'includes/class-pojo-places-shortcode.php' );
 		
-		$this->cpt = new Pojo_Places_CPT();
+		$this->cpt       = new Pojo_Places_CPT();
 		$this->shortcode = new Pojo_Places_Shortcode();
 
 		add_action( 'wp_head', array( &$this, 'print_google_maps' ), 9 );
+		add_action( 'admin_head', array( &$this, 'print_google_maps' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( &$this, 'enqueue_scripts' ), 100 );
+		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ), 100 );
 	}
 
 	private function __construct() {
