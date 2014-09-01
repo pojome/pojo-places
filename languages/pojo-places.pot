@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-places 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-22 10:36+0300\n"
+"POT-Creation-Date: 2014-09-01 08:52+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,218 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: pojo-places.php:62 pojo-places.php:73
+#: includes/class-pojo-places-cpt.php:11 includes/class-pojo-places-cpt.php:23
+msgid "Places"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:12
+msgid "Place"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:13
+msgid "Add New"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:14
+msgid "Add New Place"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:15
+msgid "Edit Place"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:16
+msgid "New Place"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:17
+msgid "All Places"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:18
+msgid "View Place"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:19
+msgid "Search Place"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:20
+msgid "No Places found"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:21
+msgid "No Places found in Trash"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:48
+msgid "Place Categories"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:49
+msgid "Place Category"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:50
+msgctxt "Admin menu name"
+msgid "Categories"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:51
+msgid "Search Categories"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:52
+msgid "All Categories"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:53
+msgid "Parent Category"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:54
+msgid "Parent Category:"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:55
+msgid "Edit Category"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:56
+msgid "Update Category"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:57
+msgid "Add New Category"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:58
+msgid "New Category Name"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:78
+msgid "Place Tags"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:79
+msgid "Place Tag"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:80
+msgctxt "Admin menu name"
+msgid "Tags"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:81
+msgid "Search Tags"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:82
+msgid "All Tags"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:83
+msgid "Parent Tag"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:84
+msgid "Parent Tag:"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:85
+msgid "Edit Tag"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:86
+msgid "Update Tag"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:87
+msgid "Add New Tag"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:88
+msgid "New Tag Name"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:112
+#, php-format
+msgid "Place updated. <a href=\"%s\">View place</a>"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:113
+msgid "Custom field updated."
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:114
+msgid "Custom field deleted."
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:115
+msgid "Place updated."
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:117
+#, php-format
+msgid "Place restored to revision from %s"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:118
+#, php-format
+msgid "Place published. <a href=\"%s\">View post</a>"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:119
+msgid "Place saved."
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:120
+#, php-format
+msgid "Place submitted. <a target=\"_blank\" href=\"%s\">Preview post</a>"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:121
+#, php-format
+msgid ""
+"Place scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Preview post</a>"
+msgstr ""
+
+#. //php.net/date
+#: includes/class-pojo-places-cpt.php:123
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:124
+#, php-format
+msgid "Place draft updated. <a target=\"_blank\" href=\"%s\">Preview post</a>"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:134
+msgid "Street"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:139
+msgid "City"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:144
+msgid "State"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:149
+msgid "Country"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:154
+msgid "Address"
+msgstr ""
+
+#: pojo-places.php:65 pojo-places.php:76
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: pojo-places.php:88
+#: pojo-places.php:91
 #, php-format
 msgid ""
 "<a href=\"%s\" target=\"_blank\">Pojo Framework</a> is not active. Please "

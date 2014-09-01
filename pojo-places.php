@@ -43,6 +43,9 @@ final class Pojo_Places {
 	
 	/** @var Pojo_Places_Shortcode */
 	public $shortcode;
+	
+	/** @var Pojo_Places_CPT */
+	public $cpt;
 
 	public function load_textdomain() {
 		load_plugin_textdomain( 'pojo-places', false, basename( dirname( __FILE__ ) ) . '/languages' );
@@ -106,8 +109,11 @@ final class Pojo_Places {
 			add_action( 'admin_notices', array( &$this, 'admin_notices' ) );
 			return;
 		}
-		
+
+		include( 'includes/class-pojo-places-cpt.php' );
 		include( 'includes/class-pojo-places-shortcode.php' );
+		
+		$this->cpt = new Pojo_Places_CPT();
 		$this->shortcode = new Pojo_Places_Shortcode();
 
 		add_action( 'wp_head', array( &$this, 'print_google_maps' ), 9 );
