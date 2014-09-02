@@ -46,6 +46,9 @@ final class Pojo_Places {
 	
 	/** @var Pojo_Places_CPT */
 	public $cpt;
+	
+	/** @var Pojo_Places_Settings */
+	public $settings;
 
 	public function load_textdomain() {
 		load_plugin_textdomain( 'pojo-places', false, basename( dirname( POJO_PLACES__FILE__ ) ) . '/languages' );
@@ -103,8 +106,12 @@ final class Pojo_Places {
 	public function print_google_maps() {
 		if ( ! $this->is_need_google_maps() )
 			return;
+		
+		$map_lang = pojo_get_option( 'places_map_language' );
+		if ( empty( $map_lang ) )
+			$map_lang = 'en';
 		?>
-		<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true&v=3&libraries=geometry,places&language=iw"></script>
+		<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true&v=3&libraries=geometry,places&language=<?php echo esc_attr( $map_lang ); ?>"></script>
 	<?php
 	}
 
@@ -121,6 +128,11 @@ final class Pojo_Places {
 			return;
 		
 		wp_enqueue_script( 'pojo-places' );
+	}
+
+	public function include_settings() {
+		include( 'includes/class-pojo-places-settings.php' );
+		$this->settings = new Pojo_Places_Settings( 80 );
 	}
 
 	public function bootstrap() {
@@ -140,6 +152,8 @@ final class Pojo_Places {
 		add_action( 'admin_head', array( &$this, 'print_google_maps' ), 9 );
 		add_action( 'wp_enqueue_scripts', array( &$this, 'enqueue_scripts' ), 100 );
 		add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ), 100 );
+
+		add_action( 'pojo_framework_base_settings_included', array( &$this, 'include_settings' ) );
 	}
 
 	private function __construct() {

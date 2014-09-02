@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-places 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 08:52+0300\n"
+"POT-Creation-Date: 2014-09-02 15:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,7 +205,8 @@ msgid "Place draft updated. <a target=\"_blank\" href=\"%s\">Preview post</a>"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:134
-msgid "Street"
+#: includes/class-pojo-places-cpt.php:169
+msgid "Address"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:139
@@ -217,18 +218,282 @@ msgid "State"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:149
-msgid "Country"
+msgid "Zip"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:154
-msgid "Address"
+msgid "Country"
 msgstr ""
 
-#: pojo-places.php:65 pojo-places.php:76
+#: includes/class-pojo-places-cpt.php:159
+msgid "Latitude"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:164
+msgid "Longitude"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:184
+msgid "Phone"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:189
+msgid "Mobile"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:194
+msgid "Fax"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:199
+msgid "Opening Hours"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:205
+msgid "Description"
+msgstr ""
+
+#: includes/class-pojo-places-cpt.php:211
+msgid "Details"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:11
+msgid "Map Language"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:14
+msgid "English"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:15
+msgid "Arabic"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:16
+msgid "Basque"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:17
+msgid "Bulgarian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:18
+msgid "Bengali"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:19
+msgid "Catalan"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:20
+msgid "Czech"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:21
+msgid "Danish"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:22
+msgid "German"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:23
+msgid "Greek"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:24
+msgid "English (Australian)"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:25
+msgid "English (Great Britain)"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:26
+msgid "Spanish"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:27
+msgid "Farsi"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:28
+msgid "Finnish"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:29
+msgid "Filipino"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:30
+msgid "French"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:31
+msgid "Galician"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:32
+msgid "Gujarati"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:33
+msgid "Hindi"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:34
+msgid "Croatian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:35
+msgid "Hungarian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:36
+msgid "Indonesian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:37
+msgid "Italian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:38
+msgid "Hebrew"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:39
+msgid "Japanese"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:40
+msgid "Kannada"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:41
+msgid "Korean"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:42
+msgid "Lithuanian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:43
+msgid "Latvian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:44
+msgid "Malayalam"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:45
+msgid "Marathi"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:46
+msgid "Dutch"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:47
+msgid "Norwegian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:48
+msgid "Norwegian Nynorsk"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:49
+msgid "Polish"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:50
+msgid "Portuguese"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:51
+msgid "Portuguese (Brazil)"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:52
+msgid "Portuguese (Portugal)"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:53
+msgid "Romanian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:54
+msgid "Russian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:55
+msgid "Slovak"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:56
+msgid "Slovenian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:57
+msgid "Serbian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:58
+msgid "Swedish"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:59
+msgid "Tagalog"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:60
+msgid "Tamil"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:61
+msgid "Telugu"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:62
+msgid "Thai"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:63
+msgid "Turkish"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:64
+msgid "Ukrainian"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:65
+msgid "Vietnamese"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:66
+msgid "Chinese (Simplified)"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:67
+msgid "Chinese (Traditional)"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:75
+msgid "Settings:"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:85
+msgid "Pojo Places Settings"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:86
+msgid "Settings"
+msgstr ""
+
+#: pojo-places.php:68 pojo-places.php:79
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: pojo-places.php:91
+#: pojo-places.php:94
 #, php-format
 msgid ""
 "<a href=\"%s\" target=\"_blank\">Pojo Framework</a> is not active. Please "

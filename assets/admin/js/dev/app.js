@@ -128,7 +128,7 @@ var Pojo_Places_Admin = Pojo_Places_Admin || {};
 
 		init: function() {
 			this.cacheElements();
-						
+			
 			this.buildElements();
 			this.bindEvents();
 		}
