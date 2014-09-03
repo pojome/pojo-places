@@ -40,15 +40,17 @@ var Pojo_Places = Pojo_Places || {};
 			$( '.places-input-filter' ).on( 'change', function() {
 				self.cache.$places
 					.addClass( 'hide' )
-					.removeClass( 'filtered' );
+					.removeClass( 'category-filtered' )
+					.removeClass( 'tag-filtered' );
 				
 				self.cache.$search_wrap
 					.find( '.places-input-filter:checked' )
 					.each( function() {
-						$( 'li[data-tags*=";' + $( this ).val() + ';"], li[data-category*=";' + $( this ).val() + ';"]', self.cache.$places_ul ).addClass( 'filtered' );
+						$( 'li[data-tags*=";' + $( this ).val() + ';"]', self.cache.$places_ul ).addClass( 'tag-filtered' );
+						$( 'li[data-category*=";' + $( this ).val() + ';"]', self.cache.$places_ul ).addClass( 'category-filtered' );
 					} );
 
-				$( 'li.filtered', self.cache.$places_ul ).removeClass( 'hide' );
+				$( 'li.category-filtered.tag-filtered', self.cache.$places_ul ).removeClass( 'hide' );
 			} );
 		},
 
