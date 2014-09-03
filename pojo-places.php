@@ -97,7 +97,7 @@ final class Pojo_Places {
 	public function is_need_google_maps() {
 		if ( is_admin() ) {
 			global $pagenow;
-			return in_array( $pagenow, array( 'edit.php', 'post.php', 'post-new.php' ) );
+			return in_array( $pagenow, array( 'edit.php', 'post.php', 'post-new.php' ) ) || 'pojo_places_page_pojo-places' === get_current_screen()->id;
 		}
 		
 		return true;
@@ -130,6 +130,20 @@ final class Pojo_Places {
 		wp_enqueue_script( 'pojo-places' );
 	}
 
+	public function add_localize_script_array( $array ) {
+		$places = array();
+		$places['address_line'] = (string) pojo_get_option( 'places_start_point_text' );
+		$geo_location = explode( ';', pojo_get_option( 'places_start_point_geo' ) );
+		if ( empty( $geo_location[0] ) || empty( $geo_location[1] ) ) {
+			$geo_location = array( 32.066157, 34.777821 );
+		}
+		$places['lat'] = $geo_location[0];
+		$places['lng'] = $geo_location[1];
+
+		$array['places'] = $places;
+		return $array;
+	}
+
 	public function include_settings() {
 		include( 'includes/class-pojo-places-settings.php' );
 		$this->settings = new Pojo_Places_Settings( 80 );
@@ -159,6 +173,9 @@ final class Pojo_Places {
 	private function __construct() {
 		add_action( 'init', array( &$this, 'bootstrap' ) );
 		add_action( 'plugins_loaded', array( &$this, 'load_textdomain' ) );
+		
+		add_action( 'pojo_admin_localize_scripts_array', array( &$this, 'add_localize_script_array' ) );
+		add_action( 'pojo_localize_scripts_array', array( &$this, 'add_localize_script_array' ) );
 	}
 
 }

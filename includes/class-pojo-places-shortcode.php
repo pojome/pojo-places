@@ -6,43 +6,85 @@ class Pojo_Places_Shortcode {
 	public function __construct() {
 		add_shortcode( 'pojo-places', array( &$this, 'render' ) );
 	}
-
+	
+	protected function _print_filter( $taxonomy, $type = 'checkbox' ) {
+		$terms = get_terms( $taxonomy );
+		
+		if ( is_wp_error( $terms ) )
+			return;
+		?>
+		<ul>
+		<?php foreach ( $terms as $term ) : ?>
+			<li><label><input type="checkbox" name="tags" value="<?php echo esc_attr( $term->term_id ); ?>" class="places-input-filter" checked="checkbox" /> <?php echo esc_attr( $term->name ); ?></label></li>
+		<?php endforeach; ?>
+		</ul>
+		<?php
+	}
+	
 	public function render( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'category' => '',
+				'tags' => '',
+				'filter_address' => '',
+				'filter_category' => '',
+				'filter_tags' => '',
+			),
+			$atts
+		);
+		
+		$filter_wrapper = false;
+		foreach ( array( 'filter_address', 'filter_category', 'filter_tags' ) as $key ) {
+			if ( ! empty( $atts[ $key ] ) ) {
+				$filter_wrapper = true;
+				break;
+			}
+		}
+		
+		$places_query = new WP_Query(
+			array(
+				'post_type' => Pojo_Places_CPT::CPT_PLACE,
+				'posts_per_page' => -1,
+			)
+		);
+		
+		if ( ! $places_query->have_posts() )
+			return '';
+		
 		ob_start();
 		?>
-		<div id="pojo-places">
-			<div class="search-wrap">
-				<input class="search-box" type="search" />
-				<button class="get-geolocation-position" style="display: none;">Your Position !</button>
+		<div class="pojo-places">
+			<?php if ( $filter_wrapper ) : ?>
+			<div class="search-wrap" data-filter_category="checkbox">
+				<?php if ( 'show' === $atts['filter_address'] ) : ?>
+					<input class="search-box" type="search" />
+					<button class="get-geolocation-position" style="display: none;">Share Position !</button>
+				<?php endif; ?>
+				<?php $this->_print_filter( 'pojo_places_cat' ); ?>
+				<?php $this->_print_filter( 'pojo_places_tag' ); ?>
 			</div>
+			<?php endif; ?>
 			
 			<div class="loading" style="display: none;">Loading...</div>
 			
 			<ul class="places">
-				<li class="place" data-latitude="32.026042" data-longitude="34.857795">
-					<h4 class="title">אור יהודה - עודפים</h4>
-					קניון אור יהודה
-					<a target="_blank" href="https://www.google.com/maps/preview?q=32.026042,34.857795">Google Map</a>
+				<?php while ( $places_query->have_posts() ) :
+					$places_query->the_post();
+					
+					$latitude = (float) atmb_get_field( 'pl_latitude' );
+					$longitude = (float) atmb_get_field( 'pl_longitude' );
+					
+					$category = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_cat' ), 'term_id' );
+					$tags = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
+					?>
+				<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
+					<h4 class="title"><?php the_title(); ?></h4>
+					<?php the_content(); ?>
+					
+					<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo esc_attr( $latitude ); ?>,<?php echo esc_attr( $longitude ); ?>">Google Map</a>
 					<span class="dist-debug">0</span>
 				</li>
-				<li class="place" data-latitude="31.314825509660995" data-longitude="34.62225150000006">
-					<h4 class="title">אופקים</h4>
-					רח יהדות דרום אפריקה מרכז ביג אופקים
-					<a target="_blank" href="https://www.google.com/maps/preview?q=31.314825509660995,34.62225150000006">Google Map</a>
-					<span class="dist-debug">0</span>
-				</li>
-				<li class="place" data-latitude="31.999802139714564" data-longitude="34.87930994999999">
-					<h4 class="title">איירפורט סיטי</h4>
-					מתחם האיירפורט סיטי
-					<a target="_blank" href="https://www.google.com/maps/preview?q=31.999802139714564,34.87930994999999">Google Map</a>
-					<span class="dist-debug">0</span>
-				</li>
-				<li class="place" data-latitude="29.55093600900329" data-longitude="34.954519000000005">
-					<h4 class="title">אילת</h4>
-					קניון מול הים
-					<a target="_blank" href="https://www.google.com/maps/preview?q=29.55093600900329,34.954519000000005">Google Map</a>
-					<span class="dist-debug">0</span>
-				</li>
+				<?php endwhile; wp_reset_postdata(); ?>
 			</ul>
 		</div>
 		<?php

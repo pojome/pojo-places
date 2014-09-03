@@ -1,4 +1,4 @@
-/*global jQuery, Modernizr, google */
+/*global jQuery, Modernizr, google, POJO_ADMIN */
 
 var Pojo_Places_Admin = Pojo_Places_Admin || {};
 
@@ -27,6 +27,12 @@ var Pojo_Places_Admin = Pojo_Places_Admin || {};
 				$latitude: this.$( 'div.atmb-field-row.atmb-latitude input.atmb-field-text' ),
 				$longitude: this.$( 'div.atmb-field-row.atmb-longitude input.atmb-field-text' )
 			};
+			
+			// Settings:
+			this.cache.settingFields = {
+				$addressLine: $( '#places_start_point_text' ),
+				$geoLocation: $( '#places_start_point_geo' )
+			};
 		},
 
 		$: function( selector ) {
@@ -40,7 +46,22 @@ var Pojo_Places_Admin = Pojo_Places_Admin || {};
 				
 				self.cache.$map = self.$( '#pojo-google-map-wrap' );
 				self.cache.$lookupLocation = self.$( '#pojo-lookup-location' );
+				self.geocoder = new google.maps.Geocoder();
 				self.bindMapEvents();
+			}
+			
+			if ( 1 <= self.cache.settingFields.$addressLine.length ) {
+				self.geocoder = new google.maps.Geocoder();
+
+				var autocomplete = new google.maps.places.Autocomplete( self.cache.settingFields.$addressLine[0], { types: [ 'geocode' ] } );
+				google.maps.event.addListener( autocomplete, 'place_changed', function() {
+					var geometry = autocomplete.getPlace().geometry;
+					if ( undefined !== geometry ) {
+						self.cache.settingFields.$geoLocation.val(
+							geometry.location.lat() + ';' + geometry.location.lng()
+						);
+					}
+				} );
 			}
 		},
 		
@@ -53,8 +74,7 @@ var Pojo_Places_Admin = Pojo_Places_Admin || {};
 				height: '200px',
 				marginTop: '10px'
 			} );
-
-			//TODO: Put this default to setting.
+			
 			var myLocation;
 			if ( self.cache.fields.$latitude.val().length > 0 && self.cache.fields.$longitude.val().length > 0 ) {
 				myLocation = self.getLocation(
@@ -63,10 +83,12 @@ var Pojo_Places_Admin = Pojo_Places_Admin || {};
 				);
 			}
 			else {
-				myLocation = self.getLocation( 32.066157, 34.777821 );
+				myLocation = self.getLocation(
+					POJO_ADMIN.places.lat,
+					POJO_ADMIN.places.lng
+				);
 			}
-
-			self.geocoder = new google.maps.Geocoder();
+			
 			self.adminMap = new google.maps.Map( document.getElementById( 'pojo-google-map-wrap' ), {
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 				zoom: 15,

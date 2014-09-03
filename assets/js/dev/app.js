@@ -1,4 +1,4 @@
-/*global jQuery, Modernizr, google */
+/*global jQuery, Modernizr, google, Pojo */
 
 var Pojo_Places = Pojo_Places || {};
 
@@ -13,10 +13,10 @@ var Pojo_Places = Pojo_Places || {};
 
 		cacheElements: function() {
 			this.cache.$body = $( 'body' );
-			this.cache.$placesWrap = $( '#pojo-places' );
+			this.cache.$placesWrap = $( 'div.pojo-places' );
 
 			this.cache.$places_ul = this.cache.$placesWrap.find( 'ul.places' );
-			this.cache.$places = this.cache.$places_ul.find( 'li.place' );
+			this.cache.$places = this.cache.$places_ul.find( 'li.place-item' );
 
 			this.cache.$loading = this.cache.$placesWrap.find( 'div.loading' );
 
@@ -24,15 +24,32 @@ var Pojo_Places = Pojo_Places || {};
 			this.cache.$search_box = this.cache.$search_wrap.find( 'input.search-box' );
 		},
 
-		buildElements: function() {},
+		buildElements: function() {
+			
+		},
 
 		bindEvents: function() {
 			var self = this;
 
-			self.userLocation = self.google_api.getLocation( 32.07, 34.77 );
+			self.userLocation = self.google_api.getLocation( Pojo.places.lat, Pojo.places.lng );
 			self._googleListener();
 			
 			self.cache.$placesWrap.find( 'button.get-geolocation-position' ).on( 'click', self._getLocationGetPosition );
+			
+			
+			$( '.places-input-filter' ).on( 'change', function() {
+				self.cache.$places
+					.addClass( 'hide' )
+					.removeClass( 'filtered' );
+				
+				self.cache.$search_wrap
+					.find( '.places-input-filter:checked' )
+					.each( function() {
+						$( 'li[data-tags*=";' + $( this ).val() + ';"], li[data-category*=";' + $( this ).val() + ';"]', self.cache.$places_ul ).addClass( 'filtered' );
+					} );
+
+				$( 'li.filtered', self.cache.$places_ul ).removeClass( 'hide' );
+			} );
 		},
 
 		_getLocationGetPosition: function() {
@@ -61,18 +78,20 @@ var Pojo_Places = Pojo_Places || {};
 
 		_googleListener: function() {
 			var self = this;
-			var autocomplete = new google.maps.places.Autocomplete( self.cache.$search_box[0], { types: [ 'geocode' ] } );
+			if ( 1 <= self.cache.$search_box.length ) {
+				var autocomplete = new google.maps.places.Autocomplete( self.cache.$search_box[0], {types: ['geocode']} );
 
-			google.maps.event.addListener( autocomplete, 'place_changed', function() {
-				var geometry = autocomplete.getPlace().geometry;
-				if ( undefined !== geometry ) {
-					self.userLocation = geometry.location;
-					self.renderPanel();
+				google.maps.event.addListener( autocomplete, 'place_changed', function() {
+					var geometry = autocomplete.getPlace().geometry;
+					if ( undefined !== geometry ) {
+						self.userLocation = geometry.location;
+						self.renderPanel();
+					}
+				} );
+
+				if ( Modernizr.geolocation ) {
+					self.cache.$placesWrap.find( 'button.get-geolocation-position' ).show();
 				}
-			} );
-
-			if ( Modernizr.geolocation ) {
-				self.cache.$placesWrap.find( 'button.get-geolocation-position' ).show();
 			}
 		},
 		

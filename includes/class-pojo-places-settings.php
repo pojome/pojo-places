@@ -69,7 +69,7 @@ final class Pojo_Places_Settings extends Pojo_Settings_Page_Base {
 			'std' => 'en',
 		);
 		
-		/*$fields[] = array(
+		$fields[] = array(
 			'id' => 'places_start_point_text',
 			'title' => __( 'Start Point', 'pojo-places' ),
 			'classes' => 'geo-autocomplete',
@@ -80,11 +80,7 @@ final class Pojo_Places_Settings extends Pojo_Settings_Page_Base {
 			'id' => 'places_start_point_geo',
 			'title' => __( 'Start Point (GEO)', 'pojo-places' ),
 			'std' => '',
-		);*/
-		
-		
-		
-		
+		);
 		
 		$sections[] = array(
 			'id' => 'section-pojo-places',
