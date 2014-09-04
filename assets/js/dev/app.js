@@ -37,19 +37,34 @@ var Pojo_Places = Pojo_Places || {};
 			self.cache.$placesWrap.find( 'button.get-geolocation-position' ).on( 'click', self._getLocationGetPosition );
 			
 			
-			$( '.places-input-filter' ).on( 'change', function() {
+			$( '.places-input-filter, .places-select-filter' ).on( 'change', function() {
 				self.cache.$places
 					.addClass( 'hide' )
 					.removeClass( 'category-filtered' )
 					.removeClass( 'tag-filtered' );
 				
+				var terms = [];
 				self.cache.$search_wrap
-					.find( '.places-input-filter:checked' )
+					.find( '.places-input-filter:checked, .places-select-filter' )
 					.each( function() {
-						$( 'li[data-tags*=";' + $( this ).val() + ';"]', self.cache.$places_ul ).addClass( 'tag-filtered' );
-						$( 'li[data-category*=";' + $( this ).val() + ';"]', self.cache.$places_ul ).addClass( 'category-filtered' );
+						var $thisElement = $( this );
+						
+						if ( $thisElement.hasClass( 'places-select-filter' ) && '' === $thisElement.val() ) {
+							$thisElement.find( 'option' ).each( function() {
+								if ( '' !== $( this ).val() ) {
+									terms.push( $( this ).val() );
+								}
+							} );
+						} else {
+							terms.push( $thisElement.val() );
+						}
 					} );
-
+				
+				$.each( terms, function( index, value ) {
+					$( 'li[data-tags*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'tag-filtered' );
+					$( 'li[data-category*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'category-filtered' );
+				} );
+				
 				$( 'li.category-filtered.tag-filtered', self.cache.$places_ul ).removeClass( 'hide' );
 			} );
 		},

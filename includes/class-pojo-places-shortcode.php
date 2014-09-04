@@ -8,17 +8,29 @@ class Pojo_Places_Shortcode {
 	}
 	
 	protected function _print_filter( $taxonomy, $type = 'checkbox' ) {
+		if ( empty( $type ) || 'hide' === $type )
+			return;
+		
 		$terms = get_terms( $taxonomy );
 		
 		if ( is_wp_error( $terms ) )
 			return;
-		?>
-		<ul>
-		<?php foreach ( $terms as $term ) : ?>
-			<li><label><input type="checkbox" name="tags" value="<?php echo esc_attr( $term->term_id ); ?>" class="places-input-filter" checked="checkbox" /> <?php echo esc_attr( $term->name ); ?></label></li>
-		<?php endforeach; ?>
-		</ul>
+		
+		if ( 'checkbox' === $type ) : ?>
+			<ul class="places-filter-checkbox">
+				<?php foreach ( $terms as $term ) : ?>
+					<li><label><input type="checkbox" value="<?php echo esc_attr( $term->term_id ); ?>" class="places-input-filter" checked="checkbox" /> <?php echo esc_attr( $term->name ); ?></label></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php else : ?>
+			<select class="places-select-filter">
+				<option value=""><?php _e( 'All', '' ); ?></option>
+				<?php foreach ( $terms as $term ) : ?>
+					<option value="<?php echo esc_attr( $term->term_id ); ?>"><?php echo $term->name; ?></option>
+				<?php endforeach; ?>
+			</select>
 		<?php
+		endif;
 	}
 	
 	public function render( $atts ) {
@@ -60,8 +72,8 @@ class Pojo_Places_Shortcode {
 					<input class="search-box" type="search" />
 					<button class="get-geolocation-position" style="display: none;">Share Position !</button>
 				<?php endif; ?>
-				<?php $this->_print_filter( 'pojo_places_cat' ); ?>
-				<?php $this->_print_filter( 'pojo_places_tag' ); ?>
+				<?php $this->_print_filter( 'pojo_places_cat', $atts['filter_category'] ); ?>
+				<?php $this->_print_filter( 'pojo_places_tag', $atts['filter_tags'] ); ?>
 			</div>
 			<?php endif; ?>
 			
