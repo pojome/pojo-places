@@ -72,7 +72,6 @@ final class Pojo_Places_Settings extends Pojo_Settings_Page_Base {
 		$fields[] = array(
 			'id' => 'places_start_point_text',
 			'title' => __( 'Start Point', 'pojo-places' ),
-			'classes' => 'geo-autocomplete',
 			'std' => '',
 		);
 		
@@ -94,11 +93,11 @@ final class Pojo_Places_Settings extends Pojo_Settings_Page_Base {
 	}
 
 	public function __construct( $priority = 10 ) {
-		$this->_page_id = 'pojo-places';
-		$this->_page_title = __( 'Pojo Places Settings', 'pojo-places' );
+		$this->_page_id         = 'pojo-places';
+		$this->_page_title      = __( 'Pojo Places Settings', 'pojo-places' );
 		$this->_page_menu_title = __( 'Settings', 'pojo-places' );
-		$this->_page_type = 'submenu';
-		$this->_page_parent = 'edit.php?post_type=pojo_places';
+		$this->_page_type       = 'submenu';
+		$this->_page_parent     = 'edit.php?post_type=pojo_places';
 
 		add_filter( 'pojo_register_settings_sections', array( &$this, 'section_settings' ), 100 );
 
