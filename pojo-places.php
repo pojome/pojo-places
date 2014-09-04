@@ -119,10 +119,11 @@ final class Pojo_Places {
 		wp_register_script( 'pojo-places', POJO_PLACES_ASSETS_URL . 'js/app.min.js', array( 'jquery' ), false, true );
 		
 		wp_enqueue_script( 'pojo-places' );
+		
+		wp_enqueue_style( 'pojo-places', POJO_PLACES_ASSETS_URL . 'css/style.css' );
 	}
 
 	public function admin_enqueue_scripts() {
-		wp_enqueue_style( 'pojo-places', POJO_PLACES_ASSETS_URL . 'css/style.css' );
 		wp_register_script( 'pojo-places', POJO_PLACES_ASSETS_URL . 'admin/js/app.min.js', array( 'jquery' ), false, true );
 		
 		if ( ! $this->is_need_google_maps() )
