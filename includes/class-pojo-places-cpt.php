@@ -197,7 +197,7 @@ final class Pojo_Places_CPT {
 		$fields[] = array(
 			'id' => 'opening_hours',
 			'title' => __( 'Opening Hours', 'pojo-places' ),
-			 'type' => 'textarea',
+			'type' => 'textarea',
 		);
 		
 		$fields[] = array(
