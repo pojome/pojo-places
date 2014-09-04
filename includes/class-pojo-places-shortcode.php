@@ -70,12 +70,12 @@ class Pojo_Places_Shortcode {
 			<ul class="places">
 				<?php while ( $places_query->have_posts() ) :
 					$places_query->the_post();
-					
-					$latitude = (float) atmb_get_field( 'pl_latitude' );
+
+					$latitude  = (float) atmb_get_field( 'pl_latitude' );
 					$longitude = (float) atmb_get_field( 'pl_longitude' );
-					
+
 					$category = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_cat' ), 'term_id' );
-					$tags = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
+					$tags     = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
 					?>
 				<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
 					<h4 class="title"><?php the_title(); ?></h4>

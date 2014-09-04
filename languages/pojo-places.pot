@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-places 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 15:09+0300\n"
+"POT-Creation-Date: 2014-09-04 16:34+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -477,15 +477,23 @@ msgstr ""
 msgid "Chinese (Traditional)"
 msgstr ""
 
-#: includes/class-pojo-places-settings.php:75
+#: includes/class-pojo-places-settings.php:74
+msgid "Start Point"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:80
+msgid "Start Point (GEO)"
+msgstr ""
+
+#: includes/class-pojo-places-settings.php:87
 msgid "Settings:"
 msgstr ""
 
-#: includes/class-pojo-places-settings.php:85
+#: includes/class-pojo-places-settings.php:97
 msgid "Pojo Places Settings"
 msgstr ""
 
-#: includes/class-pojo-places-settings.php:86
+#: includes/class-pojo-places-settings.php:98
 msgid "Settings"
 msgstr ""
 
