@@ -106,7 +106,7 @@ module.exports = function( grunt ) {
 					cleancss: true
 				},
 				files: {
-					'assets/css/styles.css': 'assets/less/styles.less'
+					'assets/css/style.css': 'assets/less/style.less'
 				}
 			}
 		},
@@ -153,7 +153,6 @@ module.exports = function( grunt ) {
 			},
 
 			less: {
-
 				files: [
 					'**/*.less'
 				],
