@@ -53,12 +53,34 @@ class Pojo_Places_Shortcode {
 			}
 		}
 		
-		$places_query = new WP_Query(
-			array(
-				'post_type' => Pojo_Places_CPT::CPT_PLACE,
-				'posts_per_page' => -1,
-			)
+		$query_args = array(
+			'post_type' => Pojo_Places_CPT::CPT_PLACE,
+			'posts_per_page' => -1,
 		);
+		
+		if ( ! empty( $atts['category'] ) ) {
+			$query_args['tax_query'] = array(
+				array(
+					'taxonomy' => 'pojo_places_cat',
+					'field' => 'id',
+					'terms' => explode( ',', $atts['category'] ),
+					'include_children' => false,
+				),
+			);
+		}
+		
+		if ( ! empty( $atts['tags'] ) ) {
+			$query_args['tax_query'] = array(
+				array(
+					'taxonomy' => 'pojo_places_tag',
+					'field' => 'id',
+					'terms' => explode( ',', $atts['tags'] ),
+					'include_children' => false,
+				),
+			);
+		}
+		
+		$places_query = new WP_Query( $query_args );
 		
 		if ( ! $places_query->have_posts() )
 			return '';
