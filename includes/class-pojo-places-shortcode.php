@@ -24,7 +24,7 @@ class Pojo_Places_Shortcode {
 			</ul>
 		<?php else : ?>
 			<select class="places-select-filter">
-				<option value=""><?php _e( 'All', '' ); ?></option>
+				<option value=""><?php _e( 'All', 'pojo-places' ); ?></option>
 				<?php foreach ( $terms as $term ) : ?>
 					<option value="<?php echo esc_attr( $term->term_id ); ?>"><?php echo $term->name; ?></option>
 				<?php endforeach; ?>
