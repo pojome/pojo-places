@@ -62,7 +62,7 @@
 			} );
 
 
-			$( '.places-input-filter, .places-select-filter', self.cache.$search_wrap ).on( 'change', function() {
+			$( '.places-input-filter, .places-filter-select', self.cache.$search_wrap ).on( 'change', function() {
 				self.cache.$places
 					.addClass( 'hide' )
 					.removeClass( 'category-filtered' )
@@ -70,11 +70,11 @@
 
 				var terms = [];
 				self.cache.$search_wrap
-					.find( '.places-input-filter:checked, .places-select-filter' )
+					.find( '.places-input-filter:checked, .places-filter-select' )
 					.each( function() {
 						var $thisElement = $( this );
 
-						if ( $thisElement.hasClass( 'places-select-filter' ) && '' === $thisElement.val() ) {
+						if ( $thisElement.hasClass( 'places-filter-select' ) && '' === $thisElement.val() ) {
 							$thisElement.find( 'option' ).each( function() {
 								if ( '' !== $( this ).val() ) {
 									terms.push( $( this ).val() );

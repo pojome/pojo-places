@@ -23,7 +23,7 @@ class Pojo_Places_Shortcode {
 				<?php endforeach; ?>
 			</ul>
 		<?php else : ?>
-			<select class="places-select-filter">
+			<select class="places-filter-select">
 				<option value=""><?php _e( 'All', 'pojo-places' ); ?></option>
 				<?php foreach ( $terms as $term ) : ?>
 					<option value="<?php echo esc_attr( $term->term_id ); ?>"><?php echo $term->name; ?></option>
