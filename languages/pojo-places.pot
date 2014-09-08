@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-places 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-08 17:07+0300\n"
+"POT-Creation-Date: 2014-09-08 17:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -516,6 +516,14 @@ msgstr ""
 
 #: includes/class-pojo-places-shortcode.php:27
 msgid "All"
+msgstr ""
+
+#: includes/class-pojo-places-shortcode.php:95
+msgid "Share Position !"
+msgstr ""
+
+#: includes/class-pojo-places-shortcode.php:102
+msgid "Loading..."
 msgstr ""
 
 #: includes/class-pojo-places-shortcode.php:136

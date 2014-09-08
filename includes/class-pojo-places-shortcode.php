@@ -92,14 +92,14 @@ class Pojo_Places_Shortcode {
 			<div class="search-wrap" data-filter_category="checkbox">
 				<?php if ( 'show' === $atts['filter_address'] ) : ?>
 					<input class="search-box search-places" type="search" />
-					<button class="get-geolocation-position" style="display: none;">Share Position !</button>
+					<button class="get-geolocation-position" style="display: none;"><?php _e( 'Share Position !', 'pojo-places' ); ?></button>
 				<?php endif; ?>
 				<?php $this->_print_filter( 'pojo_places_cat', $atts['filter_category'] ); ?>
 				<?php $this->_print_filter( 'pojo_places_tag', $atts['filter_tags'] ); ?>
 			</div>
 			<?php endif; ?>
 			
-			<div class="loading" style="display: none;">Loading...</div>
+			<div class="loading" style="display: none;"><?php _e( 'Loading...', 'pojo-places' ); ?></div>
 			
 			<ul class="places-list">
 				<?php while ( $places_query->have_posts() ) :
