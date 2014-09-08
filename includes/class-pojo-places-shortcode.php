@@ -49,6 +49,7 @@ class Pojo_Places_Shortcode {
 				'filter_address' => '',
 				'filter_category' => '',
 				'filter_tags' => '',
+				'load_geolocation' => 'no',
 			),
 			$atts
 		);
@@ -92,10 +93,12 @@ class Pojo_Places_Shortcode {
 		
 		if ( ! $places_query->have_posts() )
 			return '';
+
+		$atts['load_geolocation'] = in_array( $atts['load_geolocation'], array( 'yes', 'no' ) ) ? $atts['load_geolocation'] : 'no';
 		
 		ob_start();
 		?>
-		<div class="pojo-places">
+		<div class="pojo-places" data-load_geolocation="<?php echo $atts['load_geolocation']; ?>">
 			<?php if ( $filter_wrapper ) : ?>
 			<div class="search-wrap" data-filter_category="checkbox">
 				<?php if ( 'show' === $atts['filter_address'] ) : ?>

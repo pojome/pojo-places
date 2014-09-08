@@ -71,6 +71,18 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			),
 			'filter' => array( &$this, '_valid_by_options' ),
 		);
+
+		$this->_form_fields[] = array(
+			'id' => 'load_geolocation',
+			'title' => __( 'Load GEO Location:', 'pojo-places' ),
+			'type' => 'select',
+			'std' => 'no',
+			'options' => array(
+				'no' => __( 'No', 'pojo-places' ),
+				'yes' => __( 'Yes', 'pojo-places' ),
+			),
+			'filter' => array( &$this, '_valid_by_options' ),
+		);
 		
 		parent::__construct(
 			'pojo_places',
@@ -89,12 +101,13 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		
 		echo do_shortcode(
 			sprintf(
-				'[pojo-places category="%s" tags="%s" filter_address="%s" filter_category="%s" filter_tags="%s"]',
+				'[pojo-places category="%s" tags="%s" filter_address="%s" filter_category="%s" filter_tags="%s" load_geolocation="%s"]',
 				implode( ',', (array) $instance['category'] ),
 				implode( ',', (array) $instance['tags'] ),
 				$instance['filter_address'],
 				$instance['filter_category'],
-				$instance['filter_tags']
+				$instance['filter_tags'],
+				$instance['load_geolocation']
 			)
 		);
 

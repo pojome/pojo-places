@@ -135,10 +135,12 @@
 				} );
 
 				if ( Modernizr.geolocation ) {
-					self.cache.$placesWrap
-						.find( 'button.get-geolocation-position' )
-						.trigger( 'click' )
-						.show();
+					var $button = self.cache.$placesWrap.find( 'button.get-geolocation-position' );
+					$button.show();
+					
+					if ( 'yes' === self.cache.$placesWrap.data( 'load_geolocation' ) ) {
+						$button.trigger( 'click' );
+					}
 				}
 			}
 		},
