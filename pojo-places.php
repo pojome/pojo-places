@@ -172,12 +172,25 @@ final class Pojo_Places {
 		add_action( 'pojo_framework_base_settings_included', array( &$this, 'include_settings' ) );
 	}
 
+	public function register_widget() {
+		include( 'includes/class-pojo-places-widget.php' );
+		register_widget( 'Pojo_Places_Widget' );
+	}
+
+	public function register_widget_builder( $widgets ) {
+		$widgets[] = 'Pojo_Places_Widget';
+		return $widgets;
+	}
+
 	private function __construct() {
 		add_action( 'init', array( &$this, 'bootstrap' ) );
 		add_action( 'plugins_loaded', array( &$this, 'load_textdomain' ) );
 		
 		add_action( 'pojo_admin_localize_scripts_array', array( &$this, 'add_localize_script_array' ) );
 		add_action( 'pojo_localize_scripts_array', array( &$this, 'add_localize_script_array' ) );
+
+		add_action( 'pojo_widgets_registered', array( &$this, 'register_widget' ) );
+		add_action( 'pb_page_builder_widgets', array( &$this, 'register_widget_builder' ) );
 	}
 
 }

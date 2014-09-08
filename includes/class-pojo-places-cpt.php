@@ -121,7 +121,7 @@ final class Pojo_Places_CPT {
 			9  => sprintf( __( 'Place scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview post</a>', 'pojo-places' ),
 				// translators: Publish box date format, see http://php.net/date
 				date_i18n( __( 'M j, Y @ G:i', 'pojo-places' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post->ID ) ) ),
-			10 => sprintf( __( 'Place draft updated. <a target="_blank" href="%s">Preview post</a>', 'pojo-places' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
+			10 => sprintf( __( 'Place draft updated. <a target="_blank" href="%s">Preview place</a>', 'pojo-places' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
 		);
 		return $messages;
 	}
@@ -132,6 +132,7 @@ final class Pojo_Places_CPT {
 		$fields[] = array(
 			'id' => 'address',
 			'title' => __( 'Address', 'pojo-places' ),
+			'desc' => __( 'Street name and number your place', 'pojo-places' ),
 		);
 
 		$fields[] = array(
@@ -166,7 +167,7 @@ final class Pojo_Places_CPT {
 		
 		$meta_boxes[] = array(
 			'id'         => 'pojo-places-address',
-			'title'      => __( 'Address', 'pojo-places' ),
+			'title'      => __( 'Place Details', 'pojo-places' ),
 			'post_types' => array( self::CPT_PLACE ),
 			'context'    => 'normal',
 			'priority'   => 'core',
@@ -208,7 +209,7 @@ final class Pojo_Places_CPT {
 		
 		$meta_boxes[] = array(
 			'id'         => 'pojo-places-details',
-			'title'      => __( 'Details', 'pojo-places' ),
+			'title'      => __( 'Extra Details', 'pojo-places' ),
 			'post_types' => array( self::CPT_PLACE ),
 			'context'    => 'normal',
 			'priority'   => 'core',

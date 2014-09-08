@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-places 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-04 16:36+0300\n"
+"POT-Creation-Date: 2014-09-07 15:10+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: includes/class-pojo-places-cpt.php:11 includes/class-pojo-places-cpt.php:23
+#: includes/class-pojo-places-widget.php:41
+#: includes/class-pojo-places-widget.php:42
 msgid "Places"
 msgstr ""
 
@@ -495,6 +497,22 @@ msgstr ""
 
 #: includes/class-pojo-places-settings.php:98
 msgid "Settings"
+msgstr ""
+
+#: includes/class-pojo-places-shortcode.php:27
+msgid "All"
+msgstr ""
+
+#: includes/class-pojo-places-widget.php:11
+msgid "Title:"
+msgstr ""
+
+#: includes/class-pojo-places-widget.php:23
+msgid "Category:"
+msgstr ""
+
+#: includes/class-pojo-places-widget.php:31
+msgid "Tags:"
 msgstr ""
 
 #: pojo-places.php:68 pojo-places.php:79
