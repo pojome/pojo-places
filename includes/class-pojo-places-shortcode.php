@@ -91,7 +91,7 @@ class Pojo_Places_Shortcode {
 			<?php if ( $filter_wrapper ) : ?>
 			<div class="search-wrap" data-filter_category="checkbox">
 				<?php if ( 'show' === $atts['filter_address'] ) : ?>
-					<input class="search-box" type="search" />
+					<input class="search-box search-places" type="search" />
 					<button class="get-geolocation-position" style="display: none;">Share Position !</button>
 				<?php endif; ?>
 				<?php $this->_print_filter( 'pojo_places_cat', $atts['filter_category'] ); ?>
@@ -101,7 +101,7 @@ class Pojo_Places_Shortcode {
 			
 			<div class="loading" style="display: none;">Loading...</div>
 			
-			<ul class="places">
+			<ul class="places-list">
 				<?php while ( $places_query->have_posts() ) :
 					$places_query->the_post();
 
@@ -112,10 +112,28 @@ class Pojo_Places_Shortcode {
 					$tags     = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
 					?>
 				<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
-					<h4 class="title"><?php the_title(); ?></h4>
-					<?php the_content(); ?>
-					
-					<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo esc_attr( $latitude ); ?>,<?php echo esc_attr( $longitude ); ?>">Google Map</a>
+					<h4 class="place-title"><?php the_title(); ?></h4>
+					<?php /* the_content(); */ ?>
+					<div class="place-thumbnail"></div>
+					<div class="place-details">
+						<div class="place-address"></div>
+						<div class="place-city"></div>
+						<div class="place-state"></div>
+						<div class="place-zip"></div>
+						<div class="place-country"></div>
+					</div>
+					<div class="extra-details">
+						<div class="place-phone"></div>
+						<div class="place-mobile"></div>
+						<div class="place-fax"></div>
+						<div class="place-opening-hours"></div>
+						<div class="place-description"></div>
+					</div>
+					<div class="place-taxonomies">
+						<div class="place-categories"></div>
+						<div class="place-tags"></div>
+					</div>
+					<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo esc_attr( $latitude ); ?>,<?php echo esc_attr( $longitude ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
 					<span class="dist-debug">0</span>
 				</li>
 				<?php endwhile; wp_reset_postdata(); ?>
