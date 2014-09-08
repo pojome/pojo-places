@@ -95,7 +95,7 @@ class Pojo_Places_Shortcode {
 			return '';
 
 		$atts['load_geolocation'] = in_array( $atts['load_geolocation'], array( 'yes', 'no' ) ) ? $atts['load_geolocation'] : 'no';
-		
+				
 		ob_start();
 		?>
 		<div class="pojo-places" data-load_geolocation="<?php echo $atts['load_geolocation']; ?>">
@@ -119,6 +119,21 @@ class Pojo_Places_Shortcode {
 					$latitude  = (float) atmb_get_field( 'pl_latitude' );
 					$longitude = (float) atmb_get_field( 'pl_longitude' );
 
+					$address = atmb_get_field( 'pl_address' );
+					$city    = atmb_get_field( 'pl_city' );
+					$state   = atmb_get_field( 'pl_state' );
+					$zipcode = atmb_get_field( 'pl_zipcode' );
+					$country = atmb_get_field( 'pl_country' );
+
+					$address_line = array_filter(
+						array(
+							$address,
+							$city,
+							$state,
+							$zipcode,
+						)
+					);
+
 					$category = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_cat' ), 'term_id' );
 					$tags     = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
 					?>
@@ -128,20 +143,20 @@ class Pojo_Places_Shortcode {
 					<div class="place-thumbnail"><img src="<?php echo esc_attr( $image_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" /></div>
 					<?php endif; ?>
 					<div class="place-details">
-						<?php if ( $meta = atmb_get_field( 'pl_address' ) ) : ?>
-							<div class="place-address"><?php echo esc_html( $meta ); ?></div>
+						<?php if ( $address ) : ?>
+							<div class="place-address"><?php echo esc_html( $address ); ?></div>
 						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_city' ) ) : ?>
-							<div class="place-city"><?php echo esc_html( $meta ); ?></div>
+						<?php if ( $city ) : ?>
+							<div class="place-city"><?php echo esc_html( $city ); ?></div>
 						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_state' ) ) : ?>
-							<div class="place-state"><?php echo esc_html( $meta ); ?></div>
+						<?php if ( $state ) : ?>
+							<div class="place-state"><?php echo esc_html( $state ); ?></div>
 						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_zipcode' ) ) : ?>
-							<div class="place-zip"><?php echo esc_html( $meta ); ?></div>
+						<?php if ( $zipcode ) : ?>
+							<div class="place-zip"><?php echo esc_html( $zipcode ); ?></div>
 						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_country' ) ) : ?>
-							<div class="place-country"><?php echo esc_html( $meta ); ?></div>
+						<?php if ( $country ) : ?>
+							<div class="place-country"><?php echo esc_html( $country ); ?></div>
 						<?php endif; ?>
 					</div>
 					<div class="extra-details">
@@ -165,7 +180,7 @@ class Pojo_Places_Shortcode {
 						<div class="place-categories"></div>
 						<div class="place-tags"></div>
 					</div>
-					<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo esc_attr( $latitude ); ?>,<?php echo esc_attr( $longitude ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
+					<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
 				</li>
 				<?php endwhile; wp_reset_postdata(); ?>
 			</ul>
