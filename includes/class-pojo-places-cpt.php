@@ -35,7 +35,7 @@ final class Pojo_Places_CPT {
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => 23,
-			'supports'           => array( 'title', 'editor', 'thumbnail' ),
+			'supports'           => array( 'title', 'thumbnail' ),
 		);
 		
 		register_post_type(
