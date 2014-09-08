@@ -37,8 +37,7 @@
 			var self = this;
 
 			self.userLocation = self.google_api.getLocation( Pojo.places.lat, Pojo.places.lng );
-			self._googleListener();
-
+			
 			self.cache.$placesWrap.find( 'button.get-geolocation-position' ).on( 'click', function() {
 				navigator.geolocation.getCurrentPosition( function( position ) {
 					self.cache.$loading.show();
@@ -60,8 +59,7 @@
 					self.renderPanel( self );
 				} );
 			} );
-
-
+			
 			$( '.places-input-filter, .places-filter-select', self.cache.$search_wrap ).on( 'change', function() {
 				self.cache.$places
 					.addClass( 'hide' )
@@ -92,6 +90,8 @@
 
 				$( 'li.category-filtered.tag-filtered', self.cache.$places_ul ).removeClass( 'hide' );
 			} );
+
+			self._googleListener();
 		},
 
 		_googleListener: function() {
@@ -109,7 +109,10 @@
 				} );
 
 				if ( Modernizr.geolocation ) {
-					self.cache.$placesWrap.find( 'button.get-geolocation-position' ).show();
+					self.cache.$placesWrap
+						.find( 'button.get-geolocation-position' )
+						.trigger( 'click' )
+						.show();
 				}
 			}
 		},
