@@ -121,21 +121,42 @@ class Pojo_Places_Shortcode {
 					?>
 				<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
 					<h4 class="place-title"><?php the_title(); ?></h4>
-					<?php /* the_content(); */ ?>
-					<div class="place-thumbnail"></div>
+					<?php if ( $image_url = Pojo_Thumbnails::get_post_thumbnail_url( array( 'width' => '420', 'height' => '270', 'crop' => true, 'placeholder' => true ) ) ) : ?>
+					<div class="place-thumbnail"><img src="<?php echo esc_attr( $image_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" /></div>
+					<?php endif; ?>
 					<div class="place-details">
-						<div class="place-address"></div>
-						<div class="place-city"></div>
-						<div class="place-state"></div>
-						<div class="place-zip"></div>
-						<div class="place-country"></div>
+						<?php if ( $meta = atmb_get_field( 'pl_address' ) ) : ?>
+							<div class="place-address"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_city' ) ) : ?>
+							<div class="place-city"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_state' ) ) : ?>
+							<div class="place-state"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_zipcode' ) ) : ?>
+							<div class="place-zip"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_country' ) ) : ?>
+							<div class="place-country"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
 					</div>
 					<div class="extra-details">
-						<div class="place-phone"></div>
-						<div class="place-mobile"></div>
-						<div class="place-fax"></div>
-						<div class="place-opening-hours"></div>
-						<div class="place-description"></div>
+						<?php if ( $meta = atmb_get_field( 'pl_phone' ) ) : ?>
+							<div class="place-phone"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_mobile' ) ) : ?>
+							<div class="place-mobile"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_fax' ) ) : ?>
+							<div class="place-fax"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_opening_hours' ) ) : ?>
+							<div class="place-opening-hours"><?php echo wpautop( esc_html( $meta ) ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_description' ) ) : ?>
+							<div class="place-description"><?php echo wpautop( esc_html( $meta ) ); ?></div>
+						<?php endif; ?>
 					</div>
 					<div class="place-taxonomies">
 						<div class="place-categories"></div>
