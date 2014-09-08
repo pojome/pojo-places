@@ -22,13 +22,16 @@
 		cacheElements: function() {
 			this.cache.$placesWrap = $( this.element );
 
-			this.cache.$places_ul = this.cache.$placesWrap.find( 'ul.places' );
+			this.cache.$places_ul = this.cache.$placesWrap.find( 'ul.places-list' );
 			this.cache.$places = this.cache.$places_ul.find( 'li.place-item' );
 
 			this.cache.$loading = this.cache.$placesWrap.find( 'div.loading' );
 
 			this.cache.$search_wrap = this.cache.$placesWrap.find( 'div.search-wrap' );
 			this.cache.$search_box = this.cache.$search_wrap.find( 'input.search-box' );
+			
+			this.cache.hasFilterTags = 1 <= $( '.places-filter-tags', this.cache.$search_wrap ).length;
+			this.cache.hasFilterCategory = 1 <= $( '.places-filter-category', this.cache.$search_wrap ).length;
 		},
 
 		buildElements: function() {},
@@ -84,11 +87,20 @@
 					} );
 
 				$.each( terms, function( index, value ) {
-					$( 'li[data-tags*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'tag-filtered' );
 					$( 'li[data-category*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'category-filtered' );
+					$( 'li[data-tags*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'tag-filtered' );
 				} );
-
-				$( 'li.category-filtered.tag-filtered', self.cache.$places_ul ).removeClass( 'hide' );
+				
+				var itemSelector = 'li';
+				if ( self.cache.hasFilterCategory ) {
+					itemSelector += '.category-filtered';
+				}
+				
+				if ( self.cache.hasFilterTags ) {
+					itemSelector += '.tag-filtered';
+				}
+				
+				$( itemSelector, self.cache.$places_ul ).removeClass( 'hide' );
 			} );
 
 			self._googleListener();

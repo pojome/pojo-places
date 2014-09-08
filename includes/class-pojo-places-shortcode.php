@@ -16,14 +16,22 @@ class Pojo_Places_Shortcode {
 		if ( is_wp_error( $terms ) )
 			return;
 		
+		$html_data_target = '';
+		if ( 'pojo_places_cat' === $taxonomy )
+			$html_data_target = 'category';
+		elseif ( 'pojo_places_tag' === $taxonomy )
+			$html_data_target = 'tags';
+		else
+			return;
+		
 		if ( 'checkbox' === $type ) : ?>
-			<ul class="places-filter-checkbox">
+			<ul class="places-filter-checkbox places-filter-<?php echo esc_attr( $html_data_target ); ?>">
 				<?php foreach ( $terms as $term ) : ?>
 					<li><label><input type="checkbox" value="<?php echo esc_attr( $term->term_id ); ?>" class="places-input-filter" checked="checkbox" /> <?php echo esc_attr( $term->name ); ?></label></li>
 				<?php endforeach; ?>
 			</ul>
 		<?php else : ?>
-			<select class="places-filter-select">
+			<select class="places-filter-select places-filter-<?php echo esc_attr( $html_data_target ); ?>">
 				<option value=""><?php _e( 'All', 'pojo-places' ); ?></option>
 				<?php foreach ( $terms as $term ) : ?>
 					<option value="<?php echo esc_attr( $term->term_id ); ?>"><?php echo $term->name; ?></option>
