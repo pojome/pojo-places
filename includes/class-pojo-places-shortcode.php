@@ -91,7 +91,7 @@ class Pojo_Places_Shortcode {
 			<?php if ( $filter_wrapper ) : ?>
 			<div class="search-wrap" data-filter_category="checkbox">
 				<?php if ( 'show' === $atts['filter_address'] ) : ?>
-					<input class="search-box search-places" type="search" />
+					<input class="search-box" type="search" />
 					<button class="get-geolocation-position" style="display: none;">Share Position !</button>
 				<?php endif; ?>
 				<?php $this->_print_filter( 'pojo_places_cat', $atts['filter_category'] ); ?>
