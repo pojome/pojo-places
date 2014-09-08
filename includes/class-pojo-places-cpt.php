@@ -219,10 +219,22 @@ final class Pojo_Places_CPT {
 		return $meta_boxes;
 	}
 
+	public function dashboard_glance_items( $elements ) {
+		$post_type = self::CPT_PLACE;
+		$num_posts = wp_count_posts( $post_type );
+		if ( $num_posts && $num_posts->publish ) {
+			$text = _n( '%s Place', '%s Places', $num_posts->publish, 'pojo-places' );
+			$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );
+			printf( '<li class="%1$s-count"><a href="edit.php?post_type=%1$s">%2$s</a></li>', $post_type, $text );
+		}
+	}
+
 	public function __construct() {
 		$this->register_post_type();
 
 		add_filter( 'post_updated_messages', array( &$this, 'post_updated_messages' ) );
+
+		add_action( 'dashboard_glance_items', array( &$this, 'dashboard_glance_items' ), 60 );
 		
 		// Metaboxes
 		add_filter( 'pojo_meta_boxes', array( &$this, 'register_address_metabox' ), 20 );
