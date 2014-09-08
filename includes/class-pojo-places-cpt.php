@@ -25,14 +25,14 @@ final class Pojo_Places_CPT {
 
 		$args = array(
 			'labels'             => $labels,
-			'public'             => true,
-			'publicly_queryable' => true,
+			'public'             => false,
+			'publicly_queryable' => false,
 			'show_ui'            => true,
 			'show_in_menu'       => true,
-			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'places' ),
+			'query_var'          => false,
+			'rewrite'            => false,
 			'capability_type'    => 'post',
-			'has_archive'        => true,
+			'has_archive'        => false,
 			'hierarchical'       => false,
 			'menu_position'      => 23,
 			'supports'           => array( 'title', 'thumbnail' ),
@@ -63,8 +63,8 @@ final class Pojo_Places_CPT {
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => true,
-			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'places-cat' ),
+			'query_var'         => false,
+			'rewrite'           => false,
 		);
 
 		register_taxonomy(
@@ -93,8 +93,8 @@ final class Pojo_Places_CPT {
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => true,
-			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'places-tag' ),
+			'query_var'         => false,
+			'rewrite'           => false,
 		);
 
 		register_taxonomy(

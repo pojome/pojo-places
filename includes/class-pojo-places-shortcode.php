@@ -134,7 +134,6 @@ class Pojo_Places_Shortcode {
 						<div class="place-tags"></div>
 					</div>
 					<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo esc_attr( $latitude ); ?>,<?php echo esc_attr( $longitude ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
-					<span class="dist-debug">0</span>
 				</li>
 				<?php endwhile; wp_reset_postdata(); ?>
 			</ul>

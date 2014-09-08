@@ -124,8 +124,7 @@
 					)
 				);
 
-				$( this ).data( 'distance', distance )
-					.find( '.dist-debug' ).html( 'dist: ' + distance );
+				$( this ).data( 'distance', distance );
 			} );
 
 			self.cache.$places.sort( function( a, b ) {
