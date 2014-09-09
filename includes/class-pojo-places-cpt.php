@@ -229,12 +229,18 @@ final class Pojo_Places_CPT {
 		}
 	}
 
+	public function admin_head() {
+		?><style type="text/css">#adminmenu #menu-posts-pojo_places div.wp-menu-image:before, #dashboard_right_now .pojo_places-count a:before { content: "\f230"; }</style>
+	<?php
+	}
+
 	public function __construct() {
 		$this->register_post_type();
 
 		add_filter( 'post_updated_messages', array( &$this, 'post_updated_messages' ) );
 
 		add_action( 'dashboard_glance_items', array( &$this, 'dashboard_glance_items' ), 60 );
+		add_action( 'admin_head', array( &$this, 'admin_head' ) );
 		
 		// Metaboxes
 		add_filter( 'pojo_meta_boxes', array( &$this, 'register_address_metabox' ), 20 );

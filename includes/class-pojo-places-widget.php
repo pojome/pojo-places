@@ -54,7 +54,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			),
 			'filter' => array( &$this, '_valid_by_options' ),
 		);
-
+		
 		$this->_form_fields[] = array(
 			'id' => 'filter_tags',
 			'title' => __( 'Filter Tags:', 'pojo-places' ),
@@ -67,7 +67,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			),
 			'filter' => array( &$this, '_valid_by_options' ),
 		);
-
+		
 		$this->_form_fields[] = array(
 			'id' => 'load_geolocation',
 			'title' => __( 'Load GEO Location:', 'pojo-places' ),
@@ -83,7 +83,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		// Metadata
 		$this->_form_fields[] = array(
 			'id' => 'custom_wrapper',
-			'title' => __( 'Advanced Options:', 'pojo-places' ),
+			'title' => __( 'Advanced Options', 'pojo-places' ),
 			'type' => 'button_collapse',
 			'mode' => 'start',
 		);
