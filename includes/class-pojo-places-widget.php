@@ -130,9 +130,9 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 
 	public function widget( $args, $instance ) {
 		$instance = wp_parse_args( $instance, $this->_get_default_values() );
-
+		
 		echo $args['before_widget'];
-
+		
 		if ( ! empty( $instance['title'] ) )
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 		
