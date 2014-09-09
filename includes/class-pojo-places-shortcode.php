@@ -62,6 +62,9 @@ class Pojo_Places_Shortcode {
 				'meta_fax' => 'show',
 				'meta_opening_hours' => 'show',
 				'meta_description' => 'show',
+				
+				'meta_category' => 'show',
+				'meta_tags' => 'show',
 				// Maps
 				'link_google' => 'show',
 				'link_waze' => 'show',
@@ -140,6 +143,9 @@ class Pojo_Places_Shortcode {
 					$zipcode = atmb_get_field( 'pl_zipcode' );
 					$country = atmb_get_field( 'pl_country' );
 
+					$category_string = 'hide' !== $atts['meta_category'] ? pojo_get_taxonomies_without_links( null, 'pojo_places_cat' ) : '';
+					$tags_string     = 'hide' !== $atts['meta_tags'] ? pojo_get_taxonomies_without_links( null, 'pojo_places_tag' ) : '';
+
 					$address_line = array_filter(
 						array(
 							$address,
@@ -193,10 +199,16 @@ class Pojo_Places_Shortcode {
 								<div class="place-description"><?php echo wpautop( esc_html( $meta ) ); ?></div>
 							<?php endif; ?>
 						</div>
-						<div class="place-taxonomies">
-							<div class="place-categories"></div>
-							<div class="place-tags"></div>
-						</div>
+						<?php if ( ! empty( $category_string ) || ! empty( $tags_string ) ) : ?>
+							<div class="place-taxonomies">
+								<?php if ( ! empty( $category_string ) ) : ?>
+									<div class="place-categories"><?php echo $category_string; ?></div>
+								<?php endif; ?>
+								<?php if ( ! empty( $category_string ) ) : ?>
+									<div class="place-tags"><?php echo $tags_string; ?></div>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
 						<?php if ( 'hide' !== $atts['link_google'] ) : ?>
 							<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
 						<?php endif; ?>
