@@ -63,8 +63,8 @@ class Pojo_Places_Shortcode {
 				'meta_opening_hours' => 'show',
 				'meta_description' => 'show',
 				// Maps
-				'link_waze' => 'show',
 				'link_google' => 'show',
+				'link_waze' => 'show',
 			),
 			$atts
 		);

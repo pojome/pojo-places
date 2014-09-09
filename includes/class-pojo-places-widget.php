@@ -89,20 +89,23 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		);
 		
 		$this->_metadata = array(
-			'address' => __( 'Address', 'pojo-places' ),
-			'city' => __( 'City', 'pojo-places' ),
-			'state' => __( 'State', 'pojo-places' ),
-			'zip' => __( 'Zip', 'pojo-places' ),
-			'phone' => __( 'Phone', 'pojo-places' ),
-			'mobile' => __( 'Mobile', 'pojo-places' ),
-			'fax' => __( 'Fax', 'pojo-places' ),
-			'opening_hours' => __( 'Opening_hours', 'pojo-places' ),
-			'description' => __( 'Description', 'pojo-places' ),
+			'thumbnail' => __( 'Thumbnail', 'pojo-places' ),
+			'meta_address' => __( 'Address', 'pojo-places' ),
+			'meta_city' => __( 'City', 'pojo-places' ),
+			'meta_state' => __( 'State', 'pojo-places' ),
+			'meta_zip' => __( 'Zip', 'pojo-places' ),
+			'meta_phone' => __( 'Phone', 'pojo-places' ),
+			'meta_mobile' => __( 'Mobile', 'pojo-places' ),
+			'meta_fax' => __( 'Fax', 'pojo-places' ),
+			'meta_opening_hours' => __( 'Opening_hours', 'pojo-places' ),
+			'meta_description' => __( 'Description', 'pojo-places' ),
+			'link_google' => __( 'Link Google', 'pojo-places' ),
+			'link_waze' => __( 'Link Waze', 'pojo-places' ),
 		);
 
 		foreach ( $this->_metadata as $key => $title ) {
 			$this->_form_fields[] = array(
-				'id' => 'meta_' . $key,
+				'id' => $key,
 				'title' => $title,
 				'type' => 'select',
 				'std' => 'show',
@@ -138,7 +141,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		
 		$metadata_attrs = array();
 		foreach ( $this->_metadata as $key => $title ) {
-			$metadata_attrs[] = sprintf( '%s="%s"', $key, $instance[ 'meta_' . $key ] );
+			$metadata_attrs[] = sprintf( '%s="%s"', $key, $instance[ $key ] );
 		}
 		
 		echo do_shortcode(
