@@ -14,7 +14,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			'std' => '',
 		);
 		
-		$this->_form_fields[] = array(
+		/*$this->_form_fields[] = array(
 			'id' => 'category',
 			'title' => __( 'Category:', 'pojo-places' ),
 			'type' => 'multi_taxonomy',
@@ -28,7 +28,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			'type' => 'multi_taxonomy',
 			'taxonomy' => 'pojo_places_tag',
 			'std' => array(),
-		);
+		);*/
 
 		$this->_form_fields[] = array(
 			'id' => 'filter_address',
@@ -89,20 +89,26 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		);
 		
 		$this->_metadata = array(
-			'address' => __( 'Address', 'pojo-places' ),
-			'city' => __( 'City', 'pojo-places' ),
-			'state' => __( 'State', 'pojo-places' ),
-			'zip' => __( 'Zip', 'pojo-places' ),
-			'phone' => __( 'Phone', 'pojo-places' ),
-			'mobile' => __( 'Mobile', 'pojo-places' ),
-			'fax' => __( 'Fax', 'pojo-places' ),
-			'opening_hours' => __( 'Opening_hours', 'pojo-places' ),
-			'description' => __( 'Description', 'pojo-places' ),
+			'thumbnail' => __( 'Thumbnail', 'pojo-places' ),
+			'meta_address' => __( 'Address', 'pojo-places' ),
+			'meta_city' => __( 'City', 'pojo-places' ),
+			'meta_state' => __( 'State', 'pojo-places' ),
+			'meta_zip' => __( 'Zip', 'pojo-places' ),
+			'meta_country' => __( 'Country', 'pojo-places' ),
+			'meta_phone' => __( 'Phone', 'pojo-places' ),
+			'meta_mobile' => __( 'Mobile', 'pojo-places' ),
+			'meta_fax' => __( 'Fax', 'pojo-places' ),
+			'meta_opening_hours' => __( 'Opening_hours', 'pojo-places' ),
+			'meta_description' => __( 'Description', 'pojo-places' ),
+			'meta_category' => __( 'Category', 'pojo-places' ),
+			'meta_tags' => __( 'Tags', 'pojo-places' ),
+			'link_google' => __( 'Link Google', 'pojo-places' ),
+			'link_waze' => __( 'Link Waze', 'pojo-places' ),
 		);
 
 		foreach ( $this->_metadata as $key => $title ) {
 			$this->_form_fields[] = array(
-				'id' => 'meta_' . $key,
+				'id' => $key,
 				'title' => $title,
 				'type' => 'select',
 				'std' => 'show',
@@ -143,9 +149,9 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		
 		echo do_shortcode(
 			sprintf(
-				'[pojo-places category="%s" tags="%s" filter_address="%s" filter_category="%s" filter_tags="%s" load_geolocation="%s" %s]',
-				implode( ',', (array) $instance['category'] ),
-				implode( ',', (array) $instance['tags'] ),
+				'[pojo-places category="" tags="" filter_address="%s" filter_category="%s" filter_tags="%s" load_geolocation="%s" %s]',
+				//implode( ',', (array) $instance['category'] ),
+				//implode( ',', (array) $instance['tags'] ),
 				$instance['filter_address'],
 				$instance['filter_category'],
 				$instance['filter_tags'],
