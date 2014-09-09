@@ -51,15 +51,20 @@ class Pojo_Places_Shortcode {
 				'filter_tags' => '',
 				'load_geolocation' => 'no',
 				// Metadata
+				'thumbnail' => 'show',
 				'meta_address' => 'show',
 				'meta_city' => 'show',
 				'meta_state' => 'show',
 				'meta_zip' => 'show',
+				'meta_country' => 'show',
 				'meta_phone' => 'show',
 				'meta_mobile' => 'show',
 				'meta_fax' => 'show',
 				'meta_opening_hours' => 'show',
 				'meta_description' => 'show',
+				// Maps
+				'link_waze' => 'show',
+				'link_google' => 'show',
 			),
 			$atts
 		);
@@ -110,18 +115,18 @@ class Pojo_Places_Shortcode {
 		?>
 		<div class="pojo-places" data-load_geolocation="<?php echo $atts['load_geolocation']; ?>">
 			<?php if ( $filter_wrapper ) : ?>
-			<div class="search-wrap" data-filter_category="checkbox">
-				<?php if ( 'show' === $atts['filter_address'] ) : ?>
-					<input class="search-box search-places" type="search" />
-					<button class="get-geolocation-position share-location" style="display: none;"></button>
-				<?php endif; ?>
-				<?php $this->_print_filter( 'pojo_places_cat', $atts['filter_category'] ); ?>
-				<?php $this->_print_filter( 'pojo_places_tag', $atts['filter_tags'] ); ?>
-			</div>
+				<div class="search-wrap" data-filter_category="checkbox">
+					<?php if ( 'show' === $atts['filter_address'] ) : ?>
+						<input class="search-box search-places" type="search" />
+						<button class="get-geolocation-position share-location" style="display: none;"></button>
+					<?php endif; ?>
+					<?php $this->_print_filter( 'pojo_places_cat', $atts['filter_category'] ); ?>
+					<?php $this->_print_filter( 'pojo_places_tag', $atts['filter_tags'] ); ?>
+				</div>
 			<?php endif; ?>
-			
+
 			<div class="loading" style="display: none;"><?php _e( 'Loading...', 'pojo-places' ); ?></div>
-			
+
 			<ul class="places-list">
 				<?php while ( $places_query->have_posts() ) :
 					$places_query->the_post();
@@ -147,52 +152,60 @@ class Pojo_Places_Shortcode {
 					$category = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_cat' ), 'term_id' );
 					$tags     = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
 					?>
-				<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
-					<h4 class="place-title"><?php the_title(); ?></h4>
-					<?php if ( $image_url = Pojo_Thumbnails::get_post_thumbnail_url( array( 'width' => '150', 'height' => '150', 'crop' => true, 'placeholder' => true ) ) ) : ?>
-					<div class="place-thumbnail"><img src="<?php echo esc_attr( $image_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" /></div>
-					<?php endif; ?>
-					<div class="place-details">
-						<?php if ( $address && 'hide' !== $atts['meta_address'] ) : ?>
-							<div class="place-address"><?php echo esc_html( $address ); ?></div>
+					<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
+						<h4 class="place-title"><?php the_title(); ?></h4>
+						<?php if ( 'hide' !== $atts['thumbnail'] && $image_url = Pojo_Thumbnails::get_post_thumbnail_url( array( 'width' => '150', 'height' => '150', 'crop' => true, 'placeholder' => true ) ) ) : ?>
+							<div class="place-thumbnail">
+								<img src="<?php echo esc_attr( $image_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" />
+							</div>
 						<?php endif; ?>
-						<?php if ( $city && 'hide' !== $atts['meta_city'] ) : ?>
-							<div class="place-city"><?php echo esc_html( $city ); ?></div>
+						<div class="place-details">
+							<?php if ( $address && 'hide' !== $atts['meta_address'] ) : ?>
+								<div class="place-address"><?php echo esc_html( $address ); ?></div>
+							<?php endif; ?>
+							<?php if ( $city && 'hide' !== $atts['meta_city'] ) : ?>
+								<div class="place-city"><?php echo esc_html( $city ); ?></div>
+							<?php endif; ?>
+							<?php if ( $state && 'hide' !== $atts['meta_state'] ) : ?>
+								<div class="place-state"><?php echo esc_html( $state ); ?></div>
+							<?php endif; ?>
+							<?php if ( $zipcode && 'hide' !== $atts['meta_zip'] ) : ?>
+								<div class="place-zip"><?php echo esc_html( $zipcode ); ?></div>
+							<?php endif; ?>
+							<?php if ( $country && 'hide' !== $atts['meta_country'] ) : ?>
+								<div class="place-country"><?php echo esc_html( $country ); ?></div>
+							<?php endif; ?>
+						</div>
+						<div class="extra-details">
+							<?php if ( $meta = atmb_get_field( 'pl_phone' ) && 'hide' !== $atts['meta_phone'] ) : ?>
+								<div class="place-phone"><?php echo esc_html( $meta ); ?></div>
+							<?php endif; ?>
+							<?php if ( $meta = atmb_get_field( 'pl_mobile' ) && 'hide' !== $atts['meta_mobile'] ) : ?>
+								<div class="place-mobile"><?php echo esc_html( $meta ); ?></div>
+							<?php endif; ?>
+							<?php if ( $meta = atmb_get_field( 'pl_fax' ) && 'hide' !== $atts['meta_fax'] ) : ?>
+								<div class="place-fax"><?php echo esc_html( $meta ); ?></div>
+							<?php endif; ?>
+							<?php if ( $meta = atmb_get_field( 'pl_opening_hours' ) && 'hide' !== $atts['meta_opening_hours'] ) : ?>
+								<div class="place-opening-hours"><?php echo wpautop( esc_html( $meta ) ); ?></div>
+							<?php endif; ?>
+							<?php if ( $meta = atmb_get_field( 'pl_description' ) && 'hide' !== $atts['meta_description'] ) : ?>
+								<div class="place-description"><?php echo wpautop( esc_html( $meta ) ); ?></div>
+							<?php endif; ?>
+						</div>
+						<div class="place-taxonomies">
+							<div class="place-categories"></div>
+							<div class="place-tags"></div>
+						</div>
+						<?php if ( 'hide' !== $atts['link_google'] ) : ?>
+							<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
 						<?php endif; ?>
-						<?php if ( $state && 'hide' !== $atts['meta_state'] ) : ?>
-							<div class="place-state"><?php echo esc_html( $state ); ?></div>
+						<?php if ( 'hide' !== $atts['link_waze'] ) : ?>
+							<a target="_blank" href="waze://?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>"><?php _e( 'Waze Map', 'pojo-places' ); ?></a>
 						<?php endif; ?>
-						<?php if ( $zipcode && 'hide' !== $atts['meta_zip'] ) : ?>
-							<div class="place-zip"><?php echo esc_html( $zipcode ); ?></div>
-						<?php endif; ?>
-						<?php if ( $country && 'hide' !== $atts['meta_country'] ) : ?>
-							<div class="place-country"><?php echo esc_html( $country ); ?></div>
-						<?php endif; ?>
-					</div>
-					<div class="extra-details">
-						<?php if ( $meta = atmb_get_field( 'pl_phone' ) && 'hide' !== $atts['meta_phone'] ) : ?>
-							<div class="place-phone"><?php echo esc_html( $meta ); ?></div>
-						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_mobile' ) && 'hide' !== $atts['meta_mobile'] ) : ?>
-							<div class="place-mobile"><?php echo esc_html( $meta ); ?></div>
-						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_fax' ) && 'hide' !== $atts['meta_fax'] ) : ?>
-							<div class="place-fax"><?php echo esc_html( $meta ); ?></div>
-						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_opening_hours' ) && 'hide' !== $atts['meta_opening_hours'] ) : ?>
-							<div class="place-opening-hours"><?php echo wpautop( esc_html( $meta ) ); ?></div>
-						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_description' ) && 'hide' !== $atts['meta_description'] ) : ?>
-							<div class="place-description"><?php echo wpautop( esc_html( $meta ) ); ?></div>
-						<?php endif; ?>
-					</div>
-					<div class="place-taxonomies">
-						<div class="place-categories"></div>
-						<div class="place-tags"></div>
-					</div>
-					<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
-				</li>
-				<?php endwhile; wp_reset_postdata(); ?>
+					</li>
+				<?php endwhile;
+				wp_reset_postdata(); ?>
 			</ul>
 		</div>
 		<?php

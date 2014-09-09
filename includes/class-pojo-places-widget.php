@@ -138,7 +138,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		
 		$metadata_attrs = array();
 		foreach ( $this->_metadata as $key => $title ) {
-			$metadata_attrs[] = sprintf( '%s="%s"', $key, $instance[ $key ] );
+			$metadata_attrs[] = sprintf( '%s="%s"', $key, $instance[ 'meta_' . $key ] );
 		}
 		
 		echo do_shortcode(
