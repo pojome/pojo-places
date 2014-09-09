@@ -50,6 +50,16 @@ class Pojo_Places_Shortcode {
 				'filter_category' => '',
 				'filter_tags' => '',
 				'load_geolocation' => 'no',
+				// Metadata
+				'meta_address' => 'show',
+				'meta_city' => 'show',
+				'meta_state' => 'show',
+				'meta_zip' => 'show',
+				'meta_phone' => 'show',
+				'meta_mobile' => 'show',
+				'meta_fax' => 'show',
+				'meta_opening_hours' => 'show',
+				'meta_description' => 'show',
 			),
 			$atts
 		);
@@ -143,36 +153,36 @@ class Pojo_Places_Shortcode {
 					<div class="place-thumbnail"><img src="<?php echo esc_attr( $image_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" /></div>
 					<?php endif; ?>
 					<div class="place-details">
-						<?php if ( $address ) : ?>
+						<?php if ( $address && 'hide' !== $atts['meta_address'] ) : ?>
 							<div class="place-address"><?php echo esc_html( $address ); ?></div>
 						<?php endif; ?>
-						<?php if ( $city ) : ?>
+						<?php if ( $city && 'hide' !== $atts['meta_city'] ) : ?>
 							<div class="place-city"><?php echo esc_html( $city ); ?></div>
 						<?php endif; ?>
-						<?php if ( $state ) : ?>
+						<?php if ( $state && 'hide' !== $atts['meta_state'] ) : ?>
 							<div class="place-state"><?php echo esc_html( $state ); ?></div>
 						<?php endif; ?>
-						<?php if ( $zipcode ) : ?>
+						<?php if ( $zipcode && 'hide' !== $atts['meta_zip'] ) : ?>
 							<div class="place-zip"><?php echo esc_html( $zipcode ); ?></div>
 						<?php endif; ?>
-						<?php if ( $country ) : ?>
+						<?php if ( $country && 'hide' !== $atts['meta_country'] ) : ?>
 							<div class="place-country"><?php echo esc_html( $country ); ?></div>
 						<?php endif; ?>
 					</div>
 					<div class="extra-details">
-						<?php if ( $meta = atmb_get_field( 'pl_phone' ) ) : ?>
+						<?php if ( $meta = atmb_get_field( 'pl_phone' ) && 'hide' !== $atts['meta_phone'] ) : ?>
 							<div class="place-phone"><?php echo esc_html( $meta ); ?></div>
 						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_mobile' ) ) : ?>
+						<?php if ( $meta = atmb_get_field( 'pl_mobile' ) && 'hide' !== $atts['meta_mobile'] ) : ?>
 							<div class="place-mobile"><?php echo esc_html( $meta ); ?></div>
 						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_fax' ) ) : ?>
+						<?php if ( $meta = atmb_get_field( 'pl_fax' ) && 'hide' !== $atts['meta_fax'] ) : ?>
 							<div class="place-fax"><?php echo esc_html( $meta ); ?></div>
 						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_opening_hours' ) ) : ?>
+						<?php if ( $meta = atmb_get_field( 'pl_opening_hours' ) && 'hide' !== $atts['meta_opening_hours'] ) : ?>
 							<div class="place-opening-hours"><?php echo wpautop( esc_html( $meta ) ); ?></div>
 						<?php endif; ?>
-						<?php if ( $meta = atmb_get_field( 'pl_description' ) ) : ?>
+						<?php if ( $meta = atmb_get_field( 'pl_description' ) && 'hide' !== $atts['meta_description'] ) : ?>
 							<div class="place-description"><?php echo wpautop( esc_html( $meta ) ); ?></div>
 						<?php endif; ?>
 					</div>
