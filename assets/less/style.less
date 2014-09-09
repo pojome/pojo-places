@@ -2,34 +2,48 @@
  * Pojo Places Styles
 */
 
-
 /* = General
 -------------------------------------------------*/
 
 .pojo-places {
 	.search-wrap {
 		position: relative;
+		.search-places {
+			border: 1px solid #dddddd;
+			color: #AAAAAA;
+			width: 100%;
+			padding: 10px;
+			font-size: 14px;
+			line-height: 1em;
+			margin-bottom: 15px;
+		}
 		button.share-location {
+			background-color: #FFFFFF;
+			border-color: transparent transparent transparent #dddddd;
+			border-width: 0 0 0 1px;
+			border-style: solid;
 			position: absolute;
-			right: 0;
-			top: 0;
+			right: 1px;
+			top: 1px;
+			padding: 7px;
+			color: #AAAAAA;
+			-webkit-transition: all 0.3s ease-in-out; /* Firefox */
+			-moz-transition: all 0.3s ease-in-out; /* WebKit */
+			-o-transition: all 0.3s ease-in-out; /* Opera */
+			transition: all 0.3s ease-in-out; /* Standard */
+			&:hover {
+				color: #289dcc;
+			}
 			&:before {
 				content: '\f05b';
 				font-family: fontawesome;
 				font-style: normal;
 				font-weight: normal;
 				height: 40px;
-				font-size: 14px;
+				font-size: 20px;
 				line-height: 1em;
 			}
 		}
-	}
-	.search-places {
-		width: 100%;
-		padding: 10px;
-		font-size: 14px;
-		line-height: 1em;
-		margin-bottom: 15px;
 	}
 	.places-filter-select {
 		max-width: 300px;
