@@ -2,6 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 class Pojo_Places_Widget extends Pojo_Widget_Base {
+	
+	protected $_metadata = array();
 
 	public function __construct() {
 		$this->_form_fields = array();
@@ -12,12 +14,6 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			'std' => '',
 		);
 		
-		/*'category' => '',
-		'tags' => '',
-		'filter_address' => '',
-		'filter_category' => '',
-		'filter_tags' => '',*/
-
 		$this->_form_fields[] = array(
 			'id' => 'category',
 			'title' => __( 'Category:', 'pojo-places' ),
@@ -84,6 +80,47 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			'filter' => array( &$this, '_valid_by_options' ),
 		);
 		
+		// Metadata
+		$this->_form_fields[] = array(
+			'id' => 'custom_wrapper',
+			'title' => __( 'Advanced Options:', 'pojo-places' ),
+			'type' => 'button_collapse',
+			'mode' => 'start',
+		);
+		
+		$this->_metadata = array(
+			'address' => __( 'Address', 'pojo-places' ),
+			'city' => __( 'City', 'pojo-places' ),
+			'state' => __( 'State', 'pojo-places' ),
+			'zip' => __( 'Zip', 'pojo-places' ),
+			'phone' => __( 'Phone', 'pojo-places' ),
+			'mobile' => __( 'Mobile', 'pojo-places' ),
+			'fax' => __( 'Fax', 'pojo-places' ),
+			'opening_hours' => __( 'Opening_hours', 'pojo-places' ),
+			'description' => __( 'Description', 'pojo-places' ),
+		);
+
+		foreach ( $this->_metadata as $key => $title ) {
+			$this->_form_fields[] = array(
+				'id' => 'meta_' . $key,
+				'title' => $title,
+				'type' => 'select',
+				'std' => 'show',
+				'options' => array(
+					'show' => __( 'Show', 'pojo-places' ),
+					'hide' => __( 'Hide', 'pojo-places' ),
+				),
+				'filter' => array( &$this, '_valid_by_options' ),
+			);
+		}
+
+		$this->_form_fields[] = array(
+			'id' => 'custom_wrapper',
+			'title' => __( 'Custom', 'pojo-places' ),
+			'type' => 'button_collapse',
+			'mode' => 'end',
+		);
+		
 		parent::__construct(
 			'pojo_places',
 			__( 'Places', 'pojo-places' ),
@@ -99,15 +136,21 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		if ( ! empty( $instance['title'] ) )
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 		
+		$metadata_attrs = array();
+		foreach ( $this->_metadata as $key => $title ) {
+			$metadata_attrs[] = sprintf( '%s="%s"', $key, $instance[ $key ] );
+		}
+		
 		echo do_shortcode(
 			sprintf(
-				'[pojo-places category="%s" tags="%s" filter_address="%s" filter_category="%s" filter_tags="%s" load_geolocation="%s"]',
+				'[pojo-places category="%s" tags="%s" filter_address="%s" filter_category="%s" filter_tags="%s" load_geolocation="%s" %s]',
 				implode( ',', (array) $instance['category'] ),
 				implode( ',', (array) $instance['tags'] ),
 				$instance['filter_address'],
 				$instance['filter_category'],
 				$instance['filter_tags'],
-				$instance['load_geolocation']
+				$instance['load_geolocation'],
+				implode( ' ', $metadata_attrs )
 			)
 		);
 
