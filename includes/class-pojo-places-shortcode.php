@@ -52,6 +52,7 @@ class Pojo_Places_Shortcode {
 				'load_geolocation' => 'no',
 				// Metadata
 				'thumbnail' => 'show',
+				'meta_title' => 'show',
 				'meta_address' => 'show',
 				'meta_city' => 'show',
 				'meta_state' => 'show',
@@ -159,7 +160,9 @@ class Pojo_Places_Shortcode {
 					$tags     = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
 					?>
 					<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
+						<?php if ( 'hide' !== $atts['meta_title'] ) : ?>
 						<h4 class="place-title"><?php the_title(); ?></h4>
+						<?php endif; ?>
 						<?php if ( 'hide' !== $atts['thumbnail'] && $image_url = Pojo_Thumbnails::get_post_thumbnail_url( array( 'width' => '150', 'height' => '150', 'crop' => true, 'placeholder' => true ) ) ) : ?>
 							<div class="place-thumbnail">
 								<img src="<?php echo esc_attr( $image_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" />
