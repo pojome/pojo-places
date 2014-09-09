@@ -103,7 +103,7 @@ class Pojo_Places_Shortcode {
 			<div class="search-wrap" data-filter_category="checkbox">
 				<?php if ( 'show' === $atts['filter_address'] ) : ?>
 					<input class="search-box search-places" type="search" />
-					<button class="get-geolocation-position" style="display: none;"><?php _e( 'Share Position !', 'pojo-places' ); ?></button>
+					<button class="get-geolocation-position share-location" style="display: none;"></button>
 				<?php endif; ?>
 				<?php $this->_print_filter( 'pojo_places_cat', $atts['filter_category'] ); ?>
 				<?php $this->_print_filter( 'pojo_places_tag', $atts['filter_tags'] ); ?>
@@ -139,7 +139,7 @@ class Pojo_Places_Shortcode {
 					?>
 				<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
 					<h4 class="place-title"><?php the_title(); ?></h4>
-					<?php if ( $image_url = Pojo_Thumbnails::get_post_thumbnail_url( array( 'width' => '420', 'height' => '270', 'crop' => true, 'placeholder' => true ) ) ) : ?>
+					<?php if ( $image_url = Pojo_Thumbnails::get_post_thumbnail_url( array( 'width' => '150', 'height' => '150', 'crop' => true, 'placeholder' => true ) ) ) : ?>
 					<div class="place-thumbnail"><img src="<?php echo esc_attr( $image_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" /></div>
 					<?php endif; ?>
 					<div class="place-details">
