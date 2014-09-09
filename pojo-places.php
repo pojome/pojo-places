@@ -2,7 +2,7 @@
 /*
 Plugin Name: Pojo Places
 Plugin URI: http://pojo.me/
-Description: ...
+Description: Add a location finder or directory to your WordPress site with Pojo Framework in minutes. Link to Google Map or Waze, Share Location, compatible for mobile devices.
 Author: Pojo Team
 Author URI: http://pojo.me/
 Version: 1.0.0

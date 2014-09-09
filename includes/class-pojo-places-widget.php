@@ -36,38 +36,50 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 
 		$this->_form_fields[] = array(
 			'id' => 'filter_address',
-			'title' => __( 'Filter Address:', 'pojo' ),
+			'title' => __( 'Filter Address:', 'pojo-places' ),
 			'type' => 'select',
 			'std' => 'hide',
 			'options' => array(
-				'hide' => __( 'Hide', 'pojo' ),
-				'show' => __( 'Show', 'pojo' ),
+				'hide' => __( 'Hide', 'pojo-places' ),
+				'show' => __( 'Show', 'pojo-places' ),
 			),
 			'filter' => array( &$this, '_valid_by_options' ),
 		);
 
 		$this->_form_fields[] = array(
 			'id' => 'filter_category',
-			'title' => __( 'Filter Category:', 'pojo' ),
+			'title' => __( 'Filter Category:', 'pojo-places' ),
 			'type' => 'select',
 			'std' => 'hide',
 			'options' => array(
-				'hide' => __( 'Hide', 'pojo' ),
-				'checkbox' => __( 'Checkbox', 'pojo' ),
-				'select' => __( 'Select', 'pojo' ),
+				'hide' => __( 'Hide', 'pojo-places' ),
+				'checkbox' => __( 'Checkbox', 'pojo-places' ),
+				'select' => __( 'Select', 'pojo-places' ),
 			),
 			'filter' => array( &$this, '_valid_by_options' ),
 		);
 
 		$this->_form_fields[] = array(
 			'id' => 'filter_tags',
-			'title' => __( 'Filter Tags:', 'pojo' ),
+			'title' => __( 'Filter Tags:', 'pojo-places' ),
 			'type' => 'select',
 			'std' => 'hide',
 			'options' => array(
-				'hide' => __( 'Hide', 'pojo' ),
-				'checkbox' => __( 'Checkbox', 'pojo' ),
-				'select' => __( 'Select', 'pojo' ),
+				'hide' => __( 'Hide', 'pojo-places' ),
+				'checkbox' => __( 'Checkbox', 'pojo-places' ),
+				'select' => __( 'Select', 'pojo-places' ),
+			),
+			'filter' => array( &$this, '_valid_by_options' ),
+		);
+
+		$this->_form_fields[] = array(
+			'id' => 'load_geolocation',
+			'title' => __( 'Load GEO Location:', 'pojo-places' ),
+			'type' => 'select',
+			'std' => 'no',
+			'options' => array(
+				'no' => __( 'No', 'pojo-places' ),
+				'yes' => __( 'Yes', 'pojo-places' ),
 			),
 			'filter' => array( &$this, '_valid_by_options' ),
 		);
@@ -89,12 +101,13 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		
 		echo do_shortcode(
 			sprintf(
-				'[pojo-places category="%s" tags="%s" filter_address="%s" filter_category="%s" filter_tags="%s"]',
+				'[pojo-places category="%s" tags="%s" filter_address="%s" filter_category="%s" filter_tags="%s" load_geolocation="%s"]',
 				implode( ',', (array) $instance['category'] ),
 				implode( ',', (array) $instance['tags'] ),
 				$instance['filter_address'],
 				$instance['filter_category'],
-				$instance['filter_tags']
+				$instance['filter_tags'],
+				$instance['load_geolocation']
 			)
 		);
 

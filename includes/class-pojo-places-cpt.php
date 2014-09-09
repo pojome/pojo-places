@@ -25,17 +25,17 @@ final class Pojo_Places_CPT {
 
 		$args = array(
 			'labels'             => $labels,
-			'public'             => true,
-			'publicly_queryable' => true,
+			'public'             => false,
+			'publicly_queryable' => false,
 			'show_ui'            => true,
 			'show_in_menu'       => true,
-			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'places' ),
+			'query_var'          => false,
+			'rewrite'            => false,
 			'capability_type'    => 'post',
-			'has_archive'        => true,
+			'has_archive'        => false,
 			'hierarchical'       => false,
 			'menu_position'      => 23,
-			'supports'           => array( 'title', 'editor', 'thumbnail' ),
+			'supports'           => array( 'title', 'thumbnail' ),
 		);
 		
 		register_post_type(
@@ -63,8 +63,8 @@ final class Pojo_Places_CPT {
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => true,
-			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'places-cat' ),
+			'query_var'         => false,
+			'rewrite'           => false,
 		);
 
 		register_taxonomy(
@@ -93,8 +93,8 @@ final class Pojo_Places_CPT {
 			'labels'            => $labels,
 			'show_ui'           => true,
 			'show_admin_column' => true,
-			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'places-tag' ),
+			'query_var'         => false,
+			'rewrite'           => false,
 		);
 
 		register_taxonomy(
@@ -219,10 +219,22 @@ final class Pojo_Places_CPT {
 		return $meta_boxes;
 	}
 
+	public function dashboard_glance_items( $elements ) {
+		$post_type = self::CPT_PLACE;
+		$num_posts = wp_count_posts( $post_type );
+		if ( $num_posts && $num_posts->publish ) {
+			$text = _n( '%s Place', '%s Places', $num_posts->publish, 'pojo-places' );
+			$text = sprintf( $text, number_format_i18n( $num_posts->publish ) );
+			printf( '<li class="%1$s-count"><a href="edit.php?post_type=%1$s">%2$s</a></li>', $post_type, $text );
+		}
+	}
+
 	public function __construct() {
 		$this->register_post_type();
 
 		add_filter( 'post_updated_messages', array( &$this, 'post_updated_messages' ) );
+
+		add_action( 'dashboard_glance_items', array( &$this, 'dashboard_glance_items' ), 60 );
 		
 		// Metaboxes
 		add_filter( 'pojo_meta_boxes', array( &$this, 'register_address_metabox' ), 20 );

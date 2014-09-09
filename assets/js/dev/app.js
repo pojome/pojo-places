@@ -22,13 +22,16 @@
 		cacheElements: function() {
 			this.cache.$placesWrap = $( this.element );
 
-			this.cache.$places_ul = this.cache.$placesWrap.find( 'ul.places' );
+			this.cache.$places_ul = this.cache.$placesWrap.find( 'ul.places-list' );
 			this.cache.$places = this.cache.$places_ul.find( 'li.place-item' );
 
 			this.cache.$loading = this.cache.$placesWrap.find( 'div.loading' );
 
 			this.cache.$search_wrap = this.cache.$placesWrap.find( 'div.search-wrap' );
 			this.cache.$search_box = this.cache.$search_wrap.find( 'input.search-box' );
+			
+			this.cache.hasFilterTags = 1 <= $( '.places-filter-tags', this.cache.$search_wrap ).length;
+			this.cache.hasFilterCategory = 1 <= $( '.places-filter-category', this.cache.$search_wrap ).length;
 		},
 
 		buildElements: function() {},
@@ -37,11 +40,10 @@
 			var self = this;
 
 			self.userLocation = self.google_api.getLocation( Pojo.places.lat, Pojo.places.lng );
-			self._googleListener();
-
+			
 			self.cache.$placesWrap.find( 'button.get-geolocation-position' ).on( 'click', function() {
 				navigator.geolocation.getCurrentPosition( function( position ) {
-					self.cache.$loading.show();
+					self.loading.show( self );
 
 					self.userLocation = self.google_api.getLocation(
 						position.coords.latitude,
@@ -54,15 +56,16 @@
 								self.cache.$search_box.val( results[0].formatted_address );
 							}
 						}
-						self.cache.$loading.hide();
+						self.loading.hide( self );
 					} );
 
 					self.renderPanel( self );
 				} );
 			} );
-
-
-			$( '.places-input-filter, .places-select-filter', self.cache.$search_wrap ).on( 'change', function() {
+			
+			$( '.places-input-filter, .places-filter-select', self.cache.$search_wrap ).on( 'change', function() {
+				self.loading.show( self );
+				
 				self.cache.$places
 					.addClass( 'hide' )
 					.removeClass( 'category-filtered' )
@@ -70,11 +73,11 @@
 
 				var terms = [];
 				self.cache.$search_wrap
-					.find( '.places-input-filter:checked, .places-select-filter' )
+					.find( '.places-input-filter:checked, .places-filter-select' )
 					.each( function() {
 						var $thisElement = $( this );
 
-						if ( $thisElement.hasClass( 'places-select-filter' ) && '' === $thisElement.val() ) {
+						if ( $thisElement.hasClass( 'places-filter-select' ) && '' === $thisElement.val() ) {
 							$thisElement.find( 'option' ).each( function() {
 								if ( '' !== $( this ).val() ) {
 									terms.push( $( this ).val() );
@@ -86,12 +89,35 @@
 					} );
 
 				$.each( terms, function( index, value ) {
-					$( 'li[data-tags*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'tag-filtered' );
 					$( 'li[data-category*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'category-filtered' );
+					$( 'li[data-tags*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'tag-filtered' );
 				} );
+				
+				var itemSelector = 'li';
+				if ( self.cache.hasFilterCategory ) {
+					itemSelector += '.category-filtered';
+				}
+				
+				if ( self.cache.hasFilterTags ) {
+					itemSelector += '.tag-filtered';
+				}
+				
+				$( itemSelector, self.cache.$places_ul ).removeClass( 'hide' );
 
-				$( 'li.category-filtered.tag-filtered', self.cache.$places_ul ).removeClass( 'hide' );
+				self.loading.hide( self );
 			} );
+
+			self._googleListener();
+		},
+		
+		loading: {
+			show: function( self ) {
+				self.cache.$loading.show();
+			},
+			
+			hide: function( self ) {
+				self.cache.$loading.hide();
+			}
 		},
 
 		_googleListener: function() {
@@ -109,7 +135,12 @@
 				} );
 
 				if ( Modernizr.geolocation ) {
-					self.cache.$placesWrap.find( 'button.get-geolocation-position' ).show();
+					var $button = self.cache.$placesWrap.find( 'button.get-geolocation-position' );
+					$button.show();
+					
+					if ( 'yes' === self.cache.$placesWrap.data( 'load_geolocation' ) ) {
+						$button.trigger( 'click' );
+					}
 				}
 			}
 		},
@@ -124,8 +155,7 @@
 					)
 				);
 
-				$( this ).data( 'distance', distance )
-					.find( '.dist-debug' ).html( 'dist: ' + distance );
+				$( this ).data( 'distance', distance );
 			} );
 
 			self.cache.$places.sort( function( a, b ) {

@@ -16,14 +16,22 @@ class Pojo_Places_Shortcode {
 		if ( is_wp_error( $terms ) )
 			return;
 		
+		$html_data_target = '';
+		if ( 'pojo_places_cat' === $taxonomy )
+			$html_data_target = 'category';
+		elseif ( 'pojo_places_tag' === $taxonomy )
+			$html_data_target = 'tags';
+		else
+			return;
+		
 		if ( 'checkbox' === $type ) : ?>
-			<ul class="places-filter-checkbox">
+			<ul class="places-filter-checkbox places-filter-<?php echo esc_attr( $html_data_target ); ?>">
 				<?php foreach ( $terms as $term ) : ?>
 					<li><label><input type="checkbox" value="<?php echo esc_attr( $term->term_id ); ?>" class="places-input-filter" checked="checkbox" /> <?php echo esc_attr( $term->name ); ?></label></li>
 				<?php endforeach; ?>
 			</ul>
 		<?php else : ?>
-			<select class="places-select-filter">
+			<select class="places-filter-select places-filter-<?php echo esc_attr( $html_data_target ); ?>">
 				<option value=""><?php _e( 'All', 'pojo-places' ); ?></option>
 				<?php foreach ( $terms as $term ) : ?>
 					<option value="<?php echo esc_attr( $term->term_id ); ?>"><?php echo $term->name; ?></option>
@@ -41,6 +49,7 @@ class Pojo_Places_Shortcode {
 				'filter_address' => '',
 				'filter_category' => '',
 				'filter_tags' => '',
+				'load_geolocation' => 'no',
 			),
 			$atts
 		);
@@ -84,22 +93,24 @@ class Pojo_Places_Shortcode {
 		
 		if ( ! $places_query->have_posts() )
 			return '';
-		
+
+		$atts['load_geolocation'] = in_array( $atts['load_geolocation'], array( 'yes', 'no' ) ) ? $atts['load_geolocation'] : 'no';
+				
 		ob_start();
 		?>
-		<div class="pojo-places">
+		<div class="pojo-places" data-load_geolocation="<?php echo $atts['load_geolocation']; ?>">
 			<?php if ( $filter_wrapper ) : ?>
 			<div class="search-wrap" data-filter_category="checkbox">
 				<?php if ( 'show' === $atts['filter_address'] ) : ?>
 					<input class="search-box search-places" type="search" />
-					<button class="get-geolocation-position" style="display: none;">Share Position !</button>
+					<button class="get-geolocation-position" style="display: none;"><?php _e( 'Share Position !', 'pojo-places' ); ?></button>
 				<?php endif; ?>
 				<?php $this->_print_filter( 'pojo_places_cat', $atts['filter_category'] ); ?>
 				<?php $this->_print_filter( 'pojo_places_tag', $atts['filter_tags'] ); ?>
 			</div>
 			<?php endif; ?>
 			
-			<div class="loading" style="display: none;">Loading...</div>
+			<div class="loading" style="display: none;"><?php _e( 'Loading...', 'pojo-places' ); ?></div>
 			
 			<ul class="places-list">
 				<?php while ( $places_query->have_posts() ) :
@@ -108,33 +119,68 @@ class Pojo_Places_Shortcode {
 					$latitude  = (float) atmb_get_field( 'pl_latitude' );
 					$longitude = (float) atmb_get_field( 'pl_longitude' );
 
+					$address = atmb_get_field( 'pl_address' );
+					$city    = atmb_get_field( 'pl_city' );
+					$state   = atmb_get_field( 'pl_state' );
+					$zipcode = atmb_get_field( 'pl_zipcode' );
+					$country = atmb_get_field( 'pl_country' );
+
+					$address_line = array_filter(
+						array(
+							$address,
+							$city,
+							$state,
+							$zipcode,
+						)
+					);
+
 					$category = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_cat' ), 'term_id' );
 					$tags     = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
 					?>
 				<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
 					<h4 class="place-title"><?php the_title(); ?></h4>
-					<?php /* the_content(); */ ?>
-					<div class="place-thumbnail"></div>
+					<?php if ( $image_url = Pojo_Thumbnails::get_post_thumbnail_url( array( 'width' => '420', 'height' => '270', 'crop' => true, 'placeholder' => true ) ) ) : ?>
+					<div class="place-thumbnail"><img src="<?php echo esc_attr( $image_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" /></div>
+					<?php endif; ?>
 					<div class="place-details">
-						<div class="place-address"></div>
-						<div class="place-city"></div>
-						<div class="place-state"></div>
-						<div class="place-zip"></div>
-						<div class="place-country"></div>
+						<?php if ( $address ) : ?>
+							<div class="place-address"><?php echo esc_html( $address ); ?></div>
+						<?php endif; ?>
+						<?php if ( $city ) : ?>
+							<div class="place-city"><?php echo esc_html( $city ); ?></div>
+						<?php endif; ?>
+						<?php if ( $state ) : ?>
+							<div class="place-state"><?php echo esc_html( $state ); ?></div>
+						<?php endif; ?>
+						<?php if ( $zipcode ) : ?>
+							<div class="place-zip"><?php echo esc_html( $zipcode ); ?></div>
+						<?php endif; ?>
+						<?php if ( $country ) : ?>
+							<div class="place-country"><?php echo esc_html( $country ); ?></div>
+						<?php endif; ?>
 					</div>
 					<div class="extra-details">
-						<div class="place-phone"></div>
-						<div class="place-mobile"></div>
-						<div class="place-fax"></div>
-						<div class="place-opening-hours"></div>
-						<div class="place-description"></div>
+						<?php if ( $meta = atmb_get_field( 'pl_phone' ) ) : ?>
+							<div class="place-phone"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_mobile' ) ) : ?>
+							<div class="place-mobile"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_fax' ) ) : ?>
+							<div class="place-fax"><?php echo esc_html( $meta ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_opening_hours' ) ) : ?>
+							<div class="place-opening-hours"><?php echo wpautop( esc_html( $meta ) ); ?></div>
+						<?php endif; ?>
+						<?php if ( $meta = atmb_get_field( 'pl_description' ) ) : ?>
+							<div class="place-description"><?php echo wpautop( esc_html( $meta ) ); ?></div>
+						<?php endif; ?>
 					</div>
 					<div class="place-taxonomies">
 						<div class="place-categories"></div>
 						<div class="place-tags"></div>
 					</div>
-					<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo esc_attr( $latitude ); ?>,<?php echo esc_attr( $longitude ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
-					<span class="dist-debug">0</span>
+					<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
 				</li>
 				<?php endwhile; wp_reset_postdata(); ?>
 			</ul>
