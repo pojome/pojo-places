@@ -90,6 +90,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		
 		$this->_metadata = array(
 			'thumbnail' => __( 'Thumbnail', 'pojo-places' ),
+			'meta_title' => __( 'Title', 'pojo-places' ),
 			'meta_address' => __( 'Address', 'pojo-places' ),
 			'meta_city' => __( 'City', 'pojo-places' ),
 			'meta_state' => __( 'State', 'pojo-places' ),
