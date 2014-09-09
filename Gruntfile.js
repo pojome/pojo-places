@@ -93,8 +93,9 @@ module.exports = function( grunt ) {
 				},
 				files: {
 					src: [
-						'assets/css/styles.css',
-						'assets/js/scripts.min.js'
+						'assets/css/style.css',
+						'assets/admin/js/app.min.js',
+						'assets/js/app.min.js'
 					]
 				}
 			}
