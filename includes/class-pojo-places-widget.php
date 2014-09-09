@@ -54,7 +54,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			),
 			'filter' => array( &$this, '_valid_by_options' ),
 		);
-
+		
 		$this->_form_fields[] = array(
 			'id' => 'filter_tags',
 			'title' => __( 'Filter Tags:', 'pojo-places' ),
@@ -67,7 +67,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			),
 			'filter' => array( &$this, '_valid_by_options' ),
 		);
-
+		
 		$this->_form_fields[] = array(
 			'id' => 'load_geolocation',
 			'title' => __( 'Load GEO Location:', 'pojo-places' ),
@@ -83,7 +83,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		// Metadata
 		$this->_form_fields[] = array(
 			'id' => 'custom_wrapper',
-			'title' => __( 'Advanced Options:', 'pojo-places' ),
+			'title' => __( 'Advanced Options', 'pojo-places' ),
 			'type' => 'button_collapse',
 			'mode' => 'start',
 		);
@@ -130,9 +130,9 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 
 	public function widget( $args, $instance ) {
 		$instance = wp_parse_args( $instance, $this->_get_default_values() );
-
+		
 		echo $args['before_widget'];
-
+		
 		if ( ! empty( $instance['title'] ) )
 			echo $args['before_title'] . $instance['title'] . $args['after_title'];
 		
