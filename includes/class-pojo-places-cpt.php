@@ -230,6 +230,7 @@ final class Pojo_Places_CPT {
 	}
 
 	public function admin_head() {
+		// Icons in dashboard
 		?><style type="text/css">#adminmenu #menu-posts-pojo_places div.wp-menu-image:before, #dashboard_right_now .pojo_places-count a:before { content: "\f230"; }</style>
 	<?php
 	}
