@@ -7,6 +7,23 @@
 -------------------------------------------------*/
 
 .pojo-places {
+	.search-wrap {
+		position: relative;
+		button.share-location {
+			position: absolute;
+			right: 0;
+			top: 0;
+			&:before {
+				content: '\f05b';
+				font-family: fontawesome;
+				font-style: normal;
+				font-weight: normal;
+				height: 40px;
+				font-size: 14px;
+				line-height: 1em;
+			}
+		}
+	}
 	.search-places {
 		width: 100%;
 		padding: 10px;
