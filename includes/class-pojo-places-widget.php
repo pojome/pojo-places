@@ -99,6 +99,8 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			'meta_fax' => __( 'Fax', 'pojo-places' ),
 			'meta_opening_hours' => __( 'Opening_hours', 'pojo-places' ),
 			'meta_description' => __( 'Description', 'pojo-places' ),
+			'meta_category' => __( 'Category', 'pojo-places' ),
+			'meta_tags' => __( 'Tags', 'pojo-places' ),
 			'link_google' => __( 'Link Google', 'pojo-places' ),
 			'link_waze' => __( 'Link Waze', 'pojo-places' ),
 		);
