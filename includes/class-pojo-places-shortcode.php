@@ -144,6 +144,9 @@ class Pojo_Places_Shortcode {
 					$zipcode = atmb_get_field( 'pl_zipcode' );
 					$country = atmb_get_field( 'pl_country' );
 
+					$description   = atmb_get_field( 'pl_description' );
+					$opening_hours = atmb_get_field( 'pl_opening_hours' );
+
 					$category_string = 'hide' !== $atts['meta_category'] ? pojo_get_taxonomies_without_links( null, 'pojo_places_cat' ) : '';
 					$tags_string     = 'hide' !== $atts['meta_tags'] ? pojo_get_taxonomies_without_links( null, 'pojo_places_tag' ) : '';
 
@@ -198,11 +201,11 @@ class Pojo_Places_Shortcode {
 								<?php endif; ?>
 							</div>
 							<div class="extra-details">
-								<?php if ( $meta = atmb_get_field( 'pl_opening_hours' ) && 'hide' !== $atts['meta_opening_hours'] ) : ?>
-									<div class="place-opening-hours"><?php echo wpautop( esc_html( $meta ) ); ?></div>
+								<?php if ( $opening_hours && 'hide' !== $atts['meta_opening_hours'] ) : ?>
+									<div class="place-opening-hours"><?php echo wpautop( esc_html( $opening_hours ) ); ?></div>
 								<?php endif; ?>
-								<?php if ( $meta = atmb_get_field( 'pl_description' ) && 'hide' !== $atts['meta_description'] ) : ?>
-									<div class="place-description"><?php echo wpautop( esc_html( $meta ) ); ?></div>
+								<?php if ( $description && 'hide' !== $atts['meta_description'] ) : ?>
+									<div class="place-description"><?php echo wpautop( esc_html( $description ) ); ?></div>
 								<?php endif; ?>
 								<?php if ( ! empty( $category_string ) || ! empty( $tags_string ) ) : ?>
 									<div class="place-taxonomies">

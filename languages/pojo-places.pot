@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pojo-places 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-09 18:25+0300\n"
+"POT-Creation-Date: 2014-09-11 17:00+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: includes/class-pojo-places-cpt.php:11 includes/class-pojo-places-cpt.php:23
-#: includes/class-pojo-places-widget.php:132
 #: includes/class-pojo-places-widget.php:133
+#: includes/class-pojo-places-widget.php:134
 msgid "Places"
 msgstr ""
 
@@ -208,7 +208,7 @@ msgid "Place draft updated. <a target=\"_blank\" href=\"%s\">Preview place</a>"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:134
-#: includes/class-pojo-places-widget.php:93
+#: includes/class-pojo-places-widget.php:94
 msgid "Address"
 msgstr ""
 
@@ -217,22 +217,22 @@ msgid "Street name and number your place"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:140
-#: includes/class-pojo-places-widget.php:94
+#: includes/class-pojo-places-widget.php:95
 msgid "City"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:145
-#: includes/class-pojo-places-widget.php:95
+#: includes/class-pojo-places-widget.php:96
 msgid "State"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:150
-#: includes/class-pojo-places-widget.php:96
+#: includes/class-pojo-places-widget.php:97
 msgid "Zip"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:155
-#: includes/class-pojo-places-widget.php:97
+#: includes/class-pojo-places-widget.php:98
 msgid "Country"
 msgstr ""
 
@@ -249,17 +249,17 @@ msgid "Place Details"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:185
-#: includes/class-pojo-places-widget.php:98
+#: includes/class-pojo-places-widget.php:99
 msgid "Phone"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:190
-#: includes/class-pojo-places-widget.php:99
+#: includes/class-pojo-places-widget.php:100
 msgid "Mobile"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:195
-#: includes/class-pojo-places-widget.php:100
+#: includes/class-pojo-places-widget.php:101
 msgid "Fax"
 msgstr ""
 
@@ -268,7 +268,7 @@ msgid "Opening Hours"
 msgstr ""
 
 #: includes/class-pojo-places-cpt.php:206
-#: includes/class-pojo-places-widget.php:102
+#: includes/class-pojo-places-widget.php:103
 msgid "Description"
 msgstr ""
 
@@ -527,16 +527,16 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: includes/class-pojo-places-shortcode.php:131
+#: includes/class-pojo-places-shortcode.php:132
 msgid "Loading..."
 msgstr ""
 
-#: includes/class-pojo-places-shortcode.php:213
+#: includes/class-pojo-places-shortcode.php:226
 msgid "Google Map"
 msgstr ""
 
-#: includes/class-pojo-places-shortcode.php:216
-msgid "Waze Map"
+#: includes/class-pojo-places-shortcode.php:232
+msgid "Navigation with Waze"
 msgstr ""
 
 #: includes/class-pojo-places-widget.php:13
@@ -550,12 +550,12 @@ msgstr ""
 #: includes/class-pojo-places-widget.php:39
 #: includes/class-pojo-places-widget.php:51
 #: includes/class-pojo-places-widget.php:64
-#: includes/class-pojo-places-widget.php:117
+#: includes/class-pojo-places-widget.php:118
 msgid "Hide"
 msgstr ""
 
 #: includes/class-pojo-places-widget.php:40
-#: includes/class-pojo-places-widget.php:116
+#: includes/class-pojo-places-widget.php:117
 msgid "Show"
 msgstr ""
 
@@ -597,27 +597,31 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
-#: includes/class-pojo-places-widget.php:101
+#: includes/class-pojo-places-widget.php:93
+msgid "Title"
+msgstr ""
+
+#: includes/class-pojo-places-widget.php:102
 msgid "Opening_hours"
 msgstr ""
 
-#: includes/class-pojo-places-widget.php:103
+#: includes/class-pojo-places-widget.php:104
 msgid "Category"
 msgstr ""
 
-#: includes/class-pojo-places-widget.php:104
+#: includes/class-pojo-places-widget.php:105
 msgid "Tags"
 msgstr ""
 
-#: includes/class-pojo-places-widget.php:105
+#: includes/class-pojo-places-widget.php:106
 msgid "Link Google"
 msgstr ""
 
-#: includes/class-pojo-places-widget.php:106
+#: includes/class-pojo-places-widget.php:107
 msgid "Link Waze"
 msgstr ""
 
-#: includes/class-pojo-places-widget.php:125
+#: includes/class-pojo-places-widget.php:126
 msgid "Custom"
 msgstr ""
 
