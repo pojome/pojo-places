@@ -8,6 +8,7 @@
 .pojo-places {
 	.search-wrap {
 		position: relative;
+		margin-bottom: 15px;
 		.search-places {
 			border: 1px solid #dddddd;
 			color: #AAAAAA;
@@ -44,15 +45,51 @@
 				line-height: 1em;
 			}
 		}
-	}
-	.places-filter-select {
-		max-width: 300px;
-		display: inline-block;
-		min-width: 100px;
+		.places-filter-select {
+			max-width: 300px;
+			display: inline-block;
+			min-width: 100px;
+		}
 	}
 	.places-list {
 		padding: 0;
 		margin: 0;
 		list-style: none;
+		.place-item {
+			margin-top: 15px;
+			padding: 15px 0;
+			overflow: hidden;
+			border-bottom: 1px solid #F3F3F3;
+			&:first-child {
+				margin-top: 0;
+				border-top: 1px solid #F3F3F3;
+			}
+			.place-thumbnail {
+				float: left;
+				max-width: 20%;
+				padding-right: 15px;
+			}
+			.place-item-body {
+				float: left;
+				width: 60%;
+				.place-details,
+				.extra-details {
+					float: left;
+					width: 50%;
+				}
+				.place-details {
+					div {
+						display: inline-block;
+					}
+				}
+				.place-title {
+					margin-top: 0;
+				}
+			}
+			.place-go-out {
+				float: right;
+				width: 20%;
+			}
+		}
 	}
 }
