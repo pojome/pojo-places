@@ -34,7 +34,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			'id' => 'filter_address',
 			'title' => __( 'Filter Address:', 'pojo-places' ),
 			'type' => 'select',
-			'std' => 'hide',
+			'std' => 'show',
 			'options' => array(
 				'hide' => __( 'Hide', 'pojo-places' ),
 				'show' => __( 'Show', 'pojo-places' ),
@@ -72,7 +72,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			'id' => 'load_geolocation',
 			'title' => __( 'Load GEO Location:', 'pojo-places' ),
 			'type' => 'select',
-			'std' => 'no',
+			'std' => 'yes',
 			'options' => array(
 				'no' => __( 'No', 'pojo-places' ),
 				'yes' => __( 'Yes', 'pojo-places' ),
