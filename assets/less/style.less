@@ -45,6 +45,23 @@
 				line-height: 1em;
 			}
 		}
+		.places-filter-checkbox {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			li {
+				display: inline-block;
+				padding-left: 15px;
+				label {
+					line-height: 1em;
+					vertical-align: middle;
+					cursor: pointer;
+				}
+				&:first-child {
+					padding-left: 0;
+				}
+			}
+		}
 		.places-filter-select {
 			max-width: 300px;
 			display: inline-block;
@@ -77,18 +94,91 @@
 					float: left;
 					width: 50%;
 				}
-				.place-details {
-					div {
-						display: inline-block;
-					}
+				.fn {
+					margin: 0;
 				}
-				.place-title {
-					margin-top: 0;
-				}
+			}
+			.label-field {
+				font-size: 0.95em;
+				font-weight: bold;
 			}
 			.place-go-out {
 				float: right;
 				width: 20%;
+				text-align: center;
+				.goto-icon {
+					display: block;
+					font-size: 30px;
+				}
+			}
+		}
+	}
+	.loading {
+		text-align: center;
+		margin: 0;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1em;
+		line-height: 1em;
+		padding: 8px 16px;
+		vertical-align: middle;
+		&:before {
+			content: '\f021';
+			display: inline-block;
+			font-family: FontAwesome;
+			font-style: normal;
+			font-weight: normal;
+			line-height: 1;
+			margin-right: 5px;
+			animation: 2s linear 0s normal none infinite fa-spin;
+			-webkit-animation: 2s linear 0s normal none infinite fa-spin;
+		}
+	}
+}
+
+
+/* = RTL Style
+-------------------------------------------------*/
+
+body.rtl {
+	.pojo-places {
+		.search-wrap {
+			button.share-location {
+				border-color: transparent transparent transparent #dddddd;
+				border-width: 0 0 0 1px;
+				right: 1px;
+				top: 1px;
+			}
+			.places-filter-checkbox {
+				li {
+					padding-left: 15px;
+					&:first-child {
+						padding-left: 0;
+					}
+				}
+			}
+		}
+		.places-list {
+			.place-item {
+				.place-thumbnail {
+					float: left;
+					padding-right: 15px;
+				}
+				.place-item-body {
+					float: left;
+					.place-details,
+					.extra-details {
+						float: left;
+					}
+				}
+				.place-go-out {
+					float: right;
+				}
+			}
+		}
+		.loading {
+			&:before {
+				margin-right: 5px;
 			}
 		}
 	}
