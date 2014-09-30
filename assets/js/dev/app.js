@@ -65,8 +65,14 @@
 			
 			$( '.places-input-filter, .places-filter-select', self.cache.$search_wrap ).on( 'change', function() {
 				self.loading.show( self );
-				var $filters = $( '.places-input-filter, .places-filter-select', self.cache.$search_wrap );
+				var $filters = $( '.places-input-filter, .places-filter-select', self.cache.$search_wrap ),
+					form_data = self.cache.$search_wrap.find( ':input' ).serialize();
+
+				// Maybe: http://www.joezimjs.com/javascript/3-ways-to-parse-a-query-string-in-a-url/
+				//location.hash = form_data;
+				
 				$filters.prop( 'disabled', 'disabled' );
+				
 				self.cache.$places
 					.addClass( 'hide' )
 					.removeClass( 'category-filtered' )

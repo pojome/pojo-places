@@ -16,7 +16,6 @@ class Pojo_Places_Shortcode {
 		if ( is_wp_error( $terms ) )
 			return;
 		
-		$html_data_target = '';
 		if ( 'pojo_places_cat' === $taxonomy )
 			$html_data_target = 'category';
 		elseif ( 'pojo_places_tag' === $taxonomy )
@@ -27,11 +26,11 @@ class Pojo_Places_Shortcode {
 		if ( 'checkbox' === $type ) : ?>
 			<ul class="places-filter-checkbox places-filter-<?php echo esc_attr( $html_data_target ); ?>">
 				<?php foreach ( $terms as $term ) : ?>
-					<li><label><input type="checkbox" value="<?php echo esc_attr( $term->term_id ); ?>" class="places-input-filter" checked="checkbox" /> <?php echo esc_attr( $term->name ); ?></label></li>
+					<li><label><input type="checkbox" name="<?php echo esc_attr( $html_data_target ); ?>[]" value="<?php echo esc_attr( $term->term_id ); ?>" class="places-input-filter" checked="checkbox" /> <?php echo esc_attr( $term->name ); ?></label></li>
 				<?php endforeach; ?>
 			</ul>
 		<?php else : ?>
-			<select class="places-filter-select places-filter-<?php echo esc_attr( $html_data_target ); ?>">
+			<select name="<?php echo esc_attr( $html_data_target ); ?>" class="places-filter-select places-filter-<?php echo esc_attr( $html_data_target ); ?>">
 				<option value=""><?php _e( 'Filter by', 'pojo-places' ); ?></option>
 				<?php foreach ( $terms as $term ) : ?>
 					<option value="<?php echo esc_attr( $term->term_id ); ?>"><?php echo $term->name; ?></option>
