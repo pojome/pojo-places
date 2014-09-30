@@ -109,19 +109,19 @@ final class Pojo_Places_CPT {
 
 		$messages[ self::CPT_PLACE ] = array(
 			0  => '', // Unused. Messages start at index 1.
-			1  => sprintf( __( 'Place updated. <a href="%s">View place</a>', 'pojo-places' ), esc_url( get_permalink( $post->ID ) ) ),
+			1  => __( 'Place updated.', 'pojo-places' ),
 			2  => __( 'Custom field updated.', 'pojo-places' ),
 			3  => __( 'Custom field deleted.', 'pojo-places' ),
 			4  => __( 'Place updated.', 'pojo-places' ),
 			/* translators: %s: date and time of the revision */
 			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Place restored to revision from %s', 'pojo-places' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			6  => sprintf( __( 'Place published. <a href="%s">View post</a>', 'pojo-places' ), esc_url( get_permalink( $post->ID ) ) ),
+			6  => __( 'Place published.', 'pojo-places' ),
 			7  => __( 'Place saved.', 'pojo-places' ),
-			8  => sprintf( __( 'Place submitted. <a target="_blank" href="%s">Preview post</a>', 'pojo-places' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
-			9  => sprintf( __( 'Place scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview post</a>', 'pojo-places' ),
+			8  => __( 'Place submitted.', 'pojo-places' ),
+			9  => sprintf( __( 'Place scheduled for: <strong>%1$s</strong>.', 'pojo-places' ),
 				// translators: Publish box date format, see http://php.net/date
-				date_i18n( __( 'M j, Y @ G:i', 'pojo-places' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post->ID ) ) ),
-			10 => sprintf( __( 'Place draft updated. <a target="_blank" href="%s">Preview place</a>', 'pojo-places' ), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ),
+				date_i18n( __( 'M j, Y @ G:i', 'pojo-places' ), strtotime( $post->post_date ) ) ),
+			10 => __( 'Place draft updated.', 'pojo-places' ),
 		);
 		return $messages;
 	}
