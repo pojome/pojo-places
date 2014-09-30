@@ -16,7 +16,6 @@ class Pojo_Places_Shortcode {
 		if ( is_wp_error( $terms ) )
 			return;
 		
-		$html_data_target = '';
 		if ( 'pojo_places_cat' === $taxonomy )
 			$html_data_target = 'category';
 		elseif ( 'pojo_places_tag' === $taxonomy )
@@ -27,11 +26,11 @@ class Pojo_Places_Shortcode {
 		if ( 'checkbox' === $type ) : ?>
 			<ul class="places-filter-checkbox places-filter-<?php echo esc_attr( $html_data_target ); ?>">
 				<?php foreach ( $terms as $term ) : ?>
-					<li><label><input type="checkbox" value="<?php echo esc_attr( $term->term_id ); ?>" class="places-input-filter" checked="checkbox" /> <?php echo esc_attr( $term->name ); ?></label></li>
+					<li><label><input type="checkbox" name="<?php echo esc_attr( $html_data_target ); ?>[]" value="<?php echo esc_attr( $term->term_id ); ?>" class="places-input-filter" checked="checkbox" /> <?php echo esc_attr( $term->name ); ?></label></li>
 				<?php endforeach; ?>
 			</ul>
 		<?php else : ?>
-			<select class="places-filter-select places-filter-<?php echo esc_attr( $html_data_target ); ?>">
+			<select name="<?php echo esc_attr( $html_data_target ); ?>" class="places-filter-select places-filter-<?php echo esc_attr( $html_data_target ); ?>">
 				<option value=""><?php _e( 'Filter by', 'pojo-places' ); ?></option>
 				<?php foreach ( $terms as $term ) : ?>
 					<option value="<?php echo esc_attr( $term->term_id ); ?>"><?php echo $term->name; ?></option>
@@ -58,6 +57,7 @@ class Pojo_Places_Shortcode {
 				'meta_state' => 'show',
 				'meta_zip' => 'show',
 				'meta_country' => 'show',
+				'meta_email' => 'show',
 				'meta_phone' => 'show',
 				'meta_mobile' => 'show',
 				'meta_fax' => 'show',
@@ -144,6 +144,11 @@ class Pojo_Places_Shortcode {
 					$zipcode = atmb_get_field( 'pl_zipcode' );
 					$country = atmb_get_field( 'pl_country' );
 
+					$email  = sanitize_email( atmb_get_field( 'pl_email' ) );
+					$phone  = atmb_get_field( 'pl_phone' );
+					$mobile = atmb_get_field( 'pl_mobile' );
+					$fax    = atmb_get_field( 'pl_fax' );
+					
 					$description   = atmb_get_field( 'pl_description' );
 					$opening_hours = atmb_get_field( 'pl_opening_hours' );
 
@@ -158,9 +163,9 @@ class Pojo_Places_Shortcode {
 							$zipcode,
 						)
 					);
-
-					$category = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_cat' ), 'term_id' );
-					$tags     = wp_list_pluck( get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
+					
+					$category = wp_list_pluck( (array) get_the_terms( get_the_ID(), 'pojo_places_cat' ), 'term_id' );
+					$tags     = wp_list_pluck( (array) get_the_terms( get_the_ID(), 'pojo_places_tag' ), 'term_id' );
 					?>
 					<li class="place-item" data-latitude="<?php echo esc_attr( $latitude ); ?>" data-longitude="<?php echo esc_attr( $longitude ); ?>" data-tags=";<?php echo esc_attr( implode( ';', $tags ) ); ?>;" data-category=";<?php echo esc_attr( implode( ';', $category ) ); ?>;">
 						<?php if ( 'hide' !== $atts['thumbnail'] && $image_url = Pojo_Thumbnails::get_post_thumbnail_url( array( 'width' => '100', 'height' => '100', 'crop' => true, 'placeholder' => true ) ) ) : ?>
@@ -182,25 +187,29 @@ class Pojo_Places_Shortcode {
 									</div>
 								<?php endif; ?>
 								<?php if ( $city && 'hide' !== $atts['meta_city'] ) : ?>
-									<div class="place-city"><?php echo esc_html( $city ); ?></div>
+									<div class="place-city"><strong><?php _e( 'City', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $city ); ?></div>
 								<?php endif; ?>
 								<?php if ( $state && 'hide' !== $atts['meta_state'] ) : ?>
-									<div class="place-state"><?php echo esc_html( $state ); ?></div>
+									<div class="place-state"><strong><?php _e( 'State', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $state ); ?></div>
 								<?php endif; ?>
 								<?php if ( $zipcode && 'hide' !== $atts['meta_zip'] ) : ?>
-									<div class="place-zip"><?php echo esc_html( $zipcode ); ?></div>
+									<div class="place-zip"><strong><?php _e( 'Zip', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $zipcode ); ?></div>
 								<?php endif; ?>
 								<?php if ( $country && 'hide' !== $atts['meta_country'] ) : ?>
-									<div class="place-country"><?php echo esc_html( $country ); ?></div>
+									<div class="place-country"><strong><?php _e( 'Country', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $country ); ?></div>
 								<?php endif; ?>
-								<?php if ( $meta = atmb_get_field( 'pl_phone' ) && 'hide' !== $atts['meta_phone'] ) : ?>
-									<div class="place-phone"><?php echo esc_html( $meta ); ?></div>
+								<?php if ( $email && 'hide' !== $atts['meta_email'] ) : ?>
+									<div class="place-email"><strong><?php _e( 'Email', 'pojo-places' ); ?>:</strong>
+										<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></div>
 								<?php endif; ?>
-								<?php if ( $meta = atmb_get_field( 'pl_mobile' ) && 'hide' !== $atts['meta_mobile'] ) : ?>
-									<div class="place-mobile"><?php echo esc_html( $meta ); ?></div>
+								<?php if ( $phone && 'hide' !== $atts['meta_phone'] ) : ?>
+									<div class="place-phone"><strong><?php _e( 'Phone', 'pojo-places' ); ?>:</strong> <a href="tel:<?php echo esc_attr( $phone ); ?>"><?php echo esc_html( $phone ); ?></a></div>
 								<?php endif; ?>
-								<?php if ( $meta = atmb_get_field( 'pl_fax' ) && 'hide' !== $atts['meta_fax'] ) : ?>
-									<div class="place-fax"><?php echo esc_html( $meta ); ?></div>
+								<?php if ( $mobile && 'hide' !== $atts['meta_mobile'] ) : ?>
+									<div class="place-mobile"><strong><?php _e( 'Mobile', 'pojo-places' ); ?>:</strong> <a href="tel:<?php echo esc_attr( $mobile ); ?>"><?php echo esc_html( $mobile ); ?></a></div>
+								<?php endif; ?>
+								<?php if ( $fax && 'hide' !== $atts['meta_fax'] ) : ?>
+									<div class="place-fax"><strong><?php _e( 'Fax', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $fax ); ?></div>
 								<?php endif; ?>
 								<?php if ( ! empty( $category_string ) || ! empty( $tags_string ) ) : ?>
 									<div class="place-taxonomies">

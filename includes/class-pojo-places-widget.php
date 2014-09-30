@@ -96,6 +96,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			'meta_state' => __( 'State', 'pojo-places' ),
 			'meta_zip' => __( 'Zip', 'pojo-places' ),
 			'meta_country' => __( 'Country', 'pojo-places' ),
+			'meta_email' => __( 'Email', 'pojo-places' ),
 			'meta_phone' => __( 'Phone', 'pojo-places' ),
 			'meta_mobile' => __( 'Mobile', 'pojo-places' ),
 			'meta_fax' => __( 'Fax', 'pojo-places' ),
