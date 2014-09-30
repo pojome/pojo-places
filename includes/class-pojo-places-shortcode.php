@@ -32,7 +32,7 @@ class Pojo_Places_Shortcode {
 			</ul>
 		<?php else : ?>
 			<select class="places-filter-select places-filter-<?php echo esc_attr( $html_data_target ); ?>">
-				<option value=""><?php _e( 'All', 'pojo-places' ); ?></option>
+				<option value=""><?php _e( 'Filter by', 'pojo-places' ); ?></option>
 				<?php foreach ( $terms as $term ) : ?>
 					<option value="<?php echo esc_attr( $term->term_id ); ?>"><?php echo $term->name; ?></option>
 				<?php endforeach; ?>
@@ -169,10 +169,13 @@ class Pojo_Places_Shortcode {
 							</div>
 						<?php endif; ?>
 						<div class="place-item-body">
+							<?php if ( 'hide' !== $atts['meta_title'] ) : ?>
+								<h4 class="place-title"><?php the_title(); ?></h4>
+							<?php endif; ?>
+							<?php if ( $description && 'hide' !== $atts['meta_description'] ) : ?>
+								<div class="place-description"><?php echo wpautop( esc_html( $description ) ); ?></div>
+							<?php endif; ?>
 							<div class="place-details">
-								<?php if ( 'hide' !== $atts['meta_title'] ) : ?>
-									<h4 class="place-title"><?php the_title(); ?></h4>
-								<?php endif; ?>
 								<?php if ( $address && 'hide' !== $atts['meta_address'] ) : ?>
 									<div class="place-address">
 										<?php echo esc_html( $address ); ?>
@@ -199,14 +202,6 @@ class Pojo_Places_Shortcode {
 								<?php if ( $meta = atmb_get_field( 'pl_fax' ) && 'hide' !== $atts['meta_fax'] ) : ?>
 									<div class="place-fax"><?php echo esc_html( $meta ); ?></div>
 								<?php endif; ?>
-							</div>
-							<div class="extra-details">
-								<?php if ( $opening_hours && 'hide' !== $atts['meta_opening_hours'] ) : ?>
-									<div class="place-opening-hours"><?php echo wpautop( esc_html( $opening_hours ) ); ?></div>
-								<?php endif; ?>
-								<?php if ( $description && 'hide' !== $atts['meta_description'] ) : ?>
-									<div class="place-description"><?php echo wpautop( esc_html( $description ) ); ?></div>
-								<?php endif; ?>
 								<?php if ( ! empty( $category_string ) || ! empty( $tags_string ) ) : ?>
 									<div class="place-taxonomies">
 										<?php if ( ! empty( $category_string ) ) : ?>
@@ -216,6 +211,11 @@ class Pojo_Places_Shortcode {
 											<div class="place-tags"><?php echo $tags_string; ?></div>
 										<?php endif; ?>
 									</div>
+								<?php endif; ?>
+							</div>
+							<div class="extra-details">
+								<?php if ( $opening_hours && 'hide' !== $atts['meta_opening_hours'] ) : ?>
+									<div class="place-opening-hours"><?php echo wpautop( esc_html( $opening_hours ) ); ?></div>
 								<?php endif; ?>
 							</div>
 						</div>
