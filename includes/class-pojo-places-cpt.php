@@ -181,6 +181,11 @@ final class Pojo_Places_CPT {
 		$fields = array();
 
 		$fields[] = array(
+			'id' => 'email',
+			'title' => __( 'Email', 'pojo-places' ),
+		);
+
+		$fields[] = array(
 			'id' => 'phone',
 			'title' => __( 'Phone', 'pojo-places' ),
 		);

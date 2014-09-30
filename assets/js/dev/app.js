@@ -65,46 +65,50 @@
 			
 			$( '.places-input-filter, .places-filter-select', self.cache.$search_wrap ).on( 'change', function() {
 				self.loading.show( self );
-				
+				var $filters = $( '.places-input-filter, .places-filter-select', self.cache.$search_wrap );
+				$filters.prop( 'disabled', 'disabled' );
 				self.cache.$places
 					.addClass( 'hide' )
 					.removeClass( 'category-filtered' )
 					.removeClass( 'tag-filtered' );
+				
+					setTimeout( function() {
+						var terms = [];
+						self.cache.$search_wrap
+							.find( '.places-input-filter:checked, .places-filter-select' )
+							.each( function() {
+								var $thisElement = $( this );
 
-				var terms = [];
-				self.cache.$search_wrap
-					.find( '.places-input-filter:checked, .places-filter-select' )
-					.each( function() {
-						var $thisElement = $( this );
-
-						if ( $thisElement.hasClass( 'places-filter-select' ) && '' === $thisElement.val() ) {
-							$thisElement.find( 'option' ).each( function() {
-								if ( '' !== $( this ).val() ) {
-									terms.push( $( this ).val() );
+								if ( $thisElement.hasClass( 'places-filter-select' ) && '' === $thisElement.val() ) {
+									$thisElement.find( 'option' ).each( function() {
+										if ( '' !== $( this ).val() ) {
+											terms.push( $( this ).val() );
+										}
+									} );
+								} else {
+									terms.push( $thisElement.val() );
 								}
 							} );
-						} else {
-							terms.push( $thisElement.val() );
+
+						$.each( terms, function( index, value ) {
+							$( 'li[data-category*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'category-filtered' );
+							$( 'li[data-tags*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'tag-filtered' );
+						} );
+
+						var itemSelector = 'li';
+						if ( self.cache.hasFilterCategory ) {
+							itemSelector += '.category-filtered';
 						}
-					} );
 
-				$.each( terms, function( index, value ) {
-					$( 'li[data-category*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'category-filtered' );
-					$( 'li[data-tags*=";' + value + ';"]', self.cache.$places_ul ).addClass( 'tag-filtered' );
-				} );
-				
-				var itemSelector = 'li';
-				if ( self.cache.hasFilterCategory ) {
-					itemSelector += '.category-filtered';
-				}
-				
-				if ( self.cache.hasFilterTags ) {
-					itemSelector += '.tag-filtered';
-				}
-				
-				$( itemSelector, self.cache.$places_ul ).removeClass( 'hide' );
+						if ( self.cache.hasFilterTags ) {
+							itemSelector += '.tag-filtered';
+						}
 
-				self.loading.hide( self );
+						$( itemSelector, self.cache.$places_ul ).removeClass( 'hide' );
+
+						self.loading.hide( self );
+						$filters.removeProp( 'disabled' );
+					}, 500 );
 			} );
 
 			self._googleListener();
@@ -146,25 +150,30 @@
 		},
 
 		renderPanel: function( self ) {
-			self.cache.$places.each( function() {
-				var distance = Math.round(
-					self.google_api.getDistance(
-						Number( $( this ).data( 'latitude' ) ),
-						Number( $( this ).data( 'longitude' ) ),
-						self.userLocation
-					)
-				);
+			self.loading.show( self );
+			
+			setTimeout( function() {
+				self.cache.$places.each( function() {
+					var distance = Math.round(
+						self.google_api.getDistance(
+							Number( $( this ).data( 'latitude' ) ),
+							Number( $( this ).data( 'longitude' ) ),
+							self.userLocation
+						)
+					);
 
-				$( this ).data( 'distance', distance );
-			} );
+					$( this ).data( 'distance', distance );
+				} );
 
-			self.cache.$places.sort( function( a, b ) {
-				var a_distance = parseInt( $( a ).data( 'distance' ) );
-				var b_distance = parseInt( $( b ).data( 'distance' ) );
-				return ( a_distance < b_distance ) ? -1 : ( a_distance > b_distance ) ? 1 : 0;
-			} );
+				self.cache.$places.sort( function( a, b ) {
+					var a_distance = parseInt( $( a ).data( 'distance' ) );
+					var b_distance = parseInt( $( b ).data( 'distance' ) );
+					return ( a_distance < b_distance ) ? -1 : ( a_distance > b_distance ) ? 1 : 0;
+				} );
 
-			self.cache.$places_ul.append( self.cache.$places );
+				self.cache.$places_ul.append( self.cache.$places );
+				self.loading.hide( self );
+			}, 800 );
 		},
 		
 		init: function() {
