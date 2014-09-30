@@ -175,70 +175,72 @@ class Pojo_Places_Shortcode {
 						<?php endif; ?>
 						<div class="place-item-body">
 							<?php if ( 'hide' !== $atts['meta_title'] ) : ?>
-								<h4 class="place-title"><?php the_title(); ?></h4>
+								<h3 class="place-title"><?php the_title(); ?></h3>
 							<?php endif; ?>
 							<?php if ( $description && 'hide' !== $atts['meta_description'] ) : ?>
 								<div class="place-description"><?php echo wpautop( esc_html( $description ) ); ?></div>
 							<?php endif; ?>
 							<div class="place-details">
 								<?php if ( $address && 'hide' !== $atts['meta_address'] ) : ?>
-									<div class="place-address">
-										<?php echo esc_html( $address ); ?>
-									</div>
+									<div class="place-address"><span class="place-label"><?php _e( 'Address', 'pojo-places' ); ?>:</span> <?php echo esc_html( $address ); ?></div>
 								<?php endif; ?>
 								<?php if ( $city && 'hide' !== $atts['meta_city'] ) : ?>
-									<div class="place-city"><strong><?php _e( 'City', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $city ); ?></div>
+									<div class="place-city"><span class="place-label"><?php _e( 'City', 'pojo-places' ); ?>:</span> <?php echo esc_html( $city ); ?></div>
 								<?php endif; ?>
 								<?php if ( $state && 'hide' !== $atts['meta_state'] ) : ?>
-									<div class="place-state"><strong><?php _e( 'State', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $state ); ?></div>
+									<div class="place-state"><span class="place-label"><?php _e( 'State', 'pojo-places' ); ?>:</span> <?php echo esc_html( $state ); ?></div>
 								<?php endif; ?>
 								<?php if ( $zipcode && 'hide' !== $atts['meta_zip'] ) : ?>
-									<div class="place-zip"><strong><?php _e( 'Zip', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $zipcode ); ?></div>
+									<div class="place-zip"><span class="place-label"><?php _e( 'Zip', 'pojo-places' ); ?>:</span> <?php echo esc_html( $zipcode ); ?></div>
 								<?php endif; ?>
 								<?php if ( $country && 'hide' !== $atts['meta_country'] ) : ?>
-									<div class="place-country"><strong><?php _e( 'Country', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $country ); ?></div>
+									<div class="place-country"><span class="place-label"><?php _e( 'Country', 'pojo-places' ); ?>:</span> <?php echo esc_html( $country ); ?></div>
 								<?php endif; ?>
 								<?php if ( $email && 'hide' !== $atts['meta_email'] ) : ?>
-									<div class="place-email"><strong><?php _e( 'Email', 'pojo-places' ); ?>:</strong>
+									<div class="place-email"><span class="place-label"><?php _e( 'Email', 'pojo-places' ); ?>:</span>
 										<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></div>
 								<?php endif; ?>
 								<?php if ( $phone && 'hide' !== $atts['meta_phone'] ) : ?>
-									<div class="place-phone"><strong><?php _e( 'Phone', 'pojo-places' ); ?>:</strong> <a href="tel:<?php echo esc_attr( $phone ); ?>"><?php echo esc_html( $phone ); ?></a></div>
+									<div class="place-phone"><span class="place-label"><?php _e( 'Phone', 'pojo-places' ); ?>:</span> <a href="tel:<?php echo esc_attr( $phone ); ?>"><?php echo esc_html( $phone ); ?></a></div>
 								<?php endif; ?>
 								<?php if ( $mobile && 'hide' !== $atts['meta_mobile'] ) : ?>
-									<div class="place-mobile"><strong><?php _e( 'Mobile', 'pojo-places' ); ?>:</strong> <a href="tel:<?php echo esc_attr( $mobile ); ?>"><?php echo esc_html( $mobile ); ?></a></div>
+									<div class="place-mobile"><span class="place-label"><?php _e( 'Mobile', 'pojo-places' ); ?>:</span> <a href="tel:<?php echo esc_attr( $mobile ); ?>"><?php echo esc_html( $mobile ); ?></a></div>
 								<?php endif; ?>
 								<?php if ( $fax && 'hide' !== $atts['meta_fax'] ) : ?>
-									<div class="place-fax"><strong><?php _e( 'Fax', 'pojo-places' ); ?>:</strong> <?php echo esc_html( $fax ); ?></div>
+									<div class="place-fax"><span class="place-label"><?php _e( 'Fax', 'pojo-places' ); ?>:</span> <?php echo esc_html( $fax ); ?></div>
 								<?php endif; ?>
 								<?php if ( ! empty( $category_string ) || ! empty( $tags_string ) ) : ?>
 									<div class="place-taxonomies">
 										<?php if ( ! empty( $category_string ) ) : ?>
-											<div class="place-categories"><?php echo $category_string; ?></div>
+											<div class="place-categories"><span class="place-label"><?php _e( 'Categories', 'pojo-places' ); ?>:</span> <?php echo $category_string; ?></div>
 										<?php endif; ?>
 										<?php if ( ! empty( $category_string ) ) : ?>
-											<div class="place-tags"><?php echo $tags_string; ?></div>
+											<div class="place-tags"><span class="place-label"><?php _e( 'Tags', 'pojo-places' ); ?>:</span> <?php echo $tags_string; ?></div>
 										<?php endif; ?>
 									</div>
 								<?php endif; ?>
 							</div>
 							<div class="extra-details">
 								<?php if ( $opening_hours && 'hide' !== $atts['meta_opening_hours'] ) : ?>
-									<div class="place-opening-hours"><?php echo wpautop( esc_html( $opening_hours ) ); ?></div>
+									<div class="place-opening-hours"><span class="place-label"><?php _e( 'Opening Hours', 'pojo-places' ); ?>:</span> <?php echo wpautop( esc_html( $opening_hours ) ); ?></div>
 								<?php endif; ?>
 							</div>
 						</div>
 						<div class="place-go-out">
 							<?php if ( 'hide' !== $atts['link_google'] ) : ?>
 								<div class="goto-google-map">
-									<i class="fa fa-map-marker"></i>
-									<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>"><?php _e( 'Google Map', 'pojo-places' ); ?></a>
+									<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>">
+										<i class="fa fa-map-marker"></i>
+										<?php _e( 'Google Map', 'pojo-places' ); ?>
+									</a>
 								</div>
 							<?php endif; ?>
 							<?php if ( 'hide' !== $atts['link_waze'] ) : ?>
 								<div class="goto-waze">
-									<i class="fa fa-car"></i>
-									<a target="_blank" href="waze://?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>"><?php _e( 'Navigation with Waze', 'pojo-places' ); ?></a>
+									<a target="_blank" href="waze://?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>">
+										<i class="fa fa-car"></i>
+										<?php _e( 'Navigation with Waze', 'pojo-places' ); ?>
+									</a>
 								</div>
 							<?php endif; ?>
 						</div>
