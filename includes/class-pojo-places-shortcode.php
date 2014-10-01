@@ -129,7 +129,7 @@ class Pojo_Places_Shortcode {
 				</div>
 			<?php endif; ?>
 
-			<div class="loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
+			<div class="places-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
 
 			<ul class="places-list">
 				<?php while ( $places_query->have_posts() ) :

@@ -25,7 +25,7 @@
 			this.cache.$places_ul = this.cache.$placesWrap.find( 'ul.places-list' );
 			this.cache.$places = this.cache.$places_ul.find( 'li.place-item' );
 
-			this.cache.$loading = this.cache.$placesWrap.find( 'div.loading' );
+			this.cache.$loading = this.cache.$placesWrap.find( 'div.places-loading' );
 
 			this.cache.$search_wrap = this.cache.$placesWrap.find( 'div.search-wrap' );
 			this.cache.$search_box = this.cache.$search_wrap.find( 'input.search-box' );
