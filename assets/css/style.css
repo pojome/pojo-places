@@ -66,10 +66,30 @@
   display: inline-block;
   margin: 0 5px;
 }
+.pojo-places .loading {
+  text-align: center;
+}
+.pojo-places .loading .fa {
+  font-size: 4em;
+}
 .pojo-places .places-list {
   padding: 0;
   margin: 0;
   list-style: none;
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 2s linear;
+  -moz-transition: opacity 2s linear;
+  -o-transition: opacity 2s linear;
+  transition: opacity 2s linear;
+}
+.pojo-places .places-list.hide {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s 2s, opacity 2s linear;
+  -moz-transition: visibility 0s 2s, opacity 2s linear;
+  -o-transition: visibility 0s 2s, opacity 2s linear;
+  transition: visibility 0s 2s, opacity 2s linear;
 }
 .pojo-places .places-list .place-item {
   margin: 0;
@@ -151,6 +171,8 @@
   display: block;
   font-size: 4em;
 }
+.pojo-places .places-list .place-item .place-go-out .place-phone,
+.pojo-places .places-list .place-item .place-go-out .place-email,
 .pojo-places .places-list .place-item .place-go-out .goto-waze {
   display: none;
 }

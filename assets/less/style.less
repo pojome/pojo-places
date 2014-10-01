@@ -61,10 +61,30 @@
 			}
 		}
 	}
+	.loading {
+		text-align: center;
+		.fa {
+			font-size: 4em;
+		}
+	}
 	.places-list {
 		padding: 0;
 		margin: 0;
 		list-style: none;
+		visibility: visible;
+		opacity: 1;
+		-webkit-transition: opacity 2s linear;
+		-moz-transition: opacity 2s linear;
+		-o-transition: opacity 2s linear;
+		transition: opacity 2s linear;
+		&.hide {
+			visibility: hidden;
+			opacity: 0;
+			-webkit-transition: visibility 0s 2s, opacity 2s linear;
+			-moz-transition: visibility 0s 2s, opacity 2s linear;
+			-o-transition: visibility 0s 2s, opacity 2s linear;
+			transition: visibility 0s 2s, opacity 2s linear;
+		}
 		.place-item {
 			margin: 0;
 			padding: 15px 0;
@@ -151,6 +171,8 @@
 					display: block;
 					font-size: 4em;
 				}
+				.place-phone,
+				.place-email,
 				.goto-waze {
 					display: none;
 				}
