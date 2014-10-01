@@ -159,8 +159,9 @@ class Pojo_Places_Shortcode {
 						array(
 							$address,
 							$city,
-							$state,
+							//$state,
 							//$zipcode,
+							$country,
 						)
 					);
 					
