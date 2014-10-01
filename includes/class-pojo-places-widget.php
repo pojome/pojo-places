@@ -89,7 +89,7 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 		);
 		
 		$this->_metadata = array(
-			'thumbnail' => __( 'Thumbnail', 'pojo-places' ),
+			'thumbnail' => __( 'Thumbnail (Desktop only)', 'pojo-places' ),
 			'meta_title' => __( 'Title', 'pojo-places' ),
 			'meta_address' => __( 'Address', 'pojo-places' ),
 			'meta_city' => __( 'City', 'pojo-places' ),
@@ -100,12 +100,12 @@ class Pojo_Places_Widget extends Pojo_Widget_Base {
 			'meta_phone' => __( 'Phone', 'pojo-places' ),
 			'meta_mobile' => __( 'Mobile', 'pojo-places' ),
 			'meta_fax' => __( 'Fax', 'pojo-places' ),
-			'meta_opening_hours' => __( 'Opening_hours', 'pojo-places' ),
+			'meta_opening_hours' => __( 'Opening Hours', 'pojo-places' ),
 			'meta_description' => __( 'Description', 'pojo-places' ),
 			'meta_category' => __( 'Category', 'pojo-places' ),
 			'meta_tags' => __( 'Tags', 'pojo-places' ),
-			'link_google' => __( 'Link Google', 'pojo-places' ),
-			'link_waze' => __( 'Link Waze', 'pojo-places' ),
+			'link_google' => __( 'Link to Google Map', 'pojo-places' ),
+			'link_waze' => __( 'Link to Waze (Mobile only)', 'pojo-places' ),
 		);
 
 		foreach ( $this->_metadata as $key => $title ) {

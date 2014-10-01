@@ -11,7 +11,7 @@
 		margin-bottom: 15px;
 		.search-places {
 			border: 1px solid #dddddd;
-			color: #AAAAAA;
+			color: #333;
 			width: 100%;
 			padding: 10px;
 			font-size: 14px;
@@ -50,13 +50,23 @@
 			display: inline-block;
 			min-width: 100px;
 		}
+		.places-filter-checkbox {
+			display: inline-block;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			li {
+				display: inline-block;
+				margin: 0 5px;
+			}
+		}
 	}
 	.places-list {
 		padding: 0;
 		margin: 0;
 		list-style: none;
 		.place-item {
-			margin-top: 15px;
+			margin: 0;
 			padding: 15px 0;
 			overflow: hidden;
 			border-bottom: 1px solid #F3F3F3;
@@ -64,34 +74,163 @@
 				margin-top: 0;
 				border-top: 1px solid #F3F3F3;
 			}
-			.place-thumbnail {
-				float: left;
-				max-width: 20%;
-				padding-right: 15px;
-			}
 			.place-item-body {
-				float: left;
-				width: 60%;
-				.place-details,
-				.extra-details {
+				.place-thumbnail {
 					float: left;
-					width: 50%;
+					max-width: 20%;
+					img {
+						padding-right: 20px;
+					}
+				}
+				.place-title {
+					margin: 0;
+					line-height: 1;
+				}
+				.place-description {
+					font-size: 0.9em;
+					font-weight: bold;
+					p {
+						margin: 0;
+					}
 				}
 				.place-details {
+					font-size: 0.9em;
+					line-height: 1.5em;
+					display: -webkit-box;
+					display: -moz-box;
+					display: -ms-flexbox;
+					display: -webkit-flex;
+					display: flex;
+					.address-details,
+					.extra-details,
+					.place-go-out {
+						display: inline-block;
+						vertical-align: top;
+					}
+					.address-details {
+						width: 50%;
+					}
+					.extra-details {
+						width: 30%;
+						padding: 0 2%;
+					}
+					.place-go-out {
+						width: 20%;
+					}
+				}
+				.address-details {
 					div {
 						display: inline-block;
 					}
 				}
-				.place-title {
-					margin-top: 0;
-				}
 				.place-label {
 					font-weight: bold;
 				}
+				.place-address,
+				.place-city,
+				.place-state,
+				.place-zip,
+				.place-country {
+					.place-label {
+						display: none;
+					}
+				}
+				.place-city,
+				.place-state {
+					&:after {
+						content: ',';
+					}
+				}
 			}
 			.place-go-out {
-				float: right;
+				display: inline-block;
 				width: 20%;
+				text-align: center;
+				font-weight: bold;
+				.fa {
+					display: block;
+					font-size: 4em;
+				}
+				.goto-waze {
+					display: none;
+				}
+			}
+		}
+		hr.clearfix {
+			margin: 5px 0;
+			border: none;
+		}
+	}
+}
+
+/* RTL */
+
+.rtl {
+	.pojo-places {
+		.search-wrap {
+			button.share-location {
+				border-color: transparent #dddddd transparent transparent;
+				border-width: 0 1px 0 0;
+				left: 1px;
+				right: auto;
+			}
+		}
+		.places-list {
+			.place-item {
+				.place-item-body {
+					.place-thumbnail {
+						float: right;
+						img {
+							padding-right: 0;
+							padding-left: 20px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+	.pojo-places {
+		.places-list {
+			.place-item {
+				.place-item-body{
+					.place-thumbnail {
+						display: none;
+					}
+					.place-details {
+						display: block;
+						.address-details,
+						.extra-details,
+						.place-go-out {
+							display: block;
+							width: 100%;
+						}
+						.extra-details {
+							padding: 5px 0;
+						}
+						.place-go-out {
+							text-align: inherit;
+							.place-phone,
+							.goto-waze,
+							.goto-google-map,
+							.place-email {
+								display: inline-block;
+								a {
+									background-color: #EEEEEE;
+									display: block;
+									padding: 8px 12px;
+									.fa {
+										display: inline-block;
+										font-size: 1em;
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
