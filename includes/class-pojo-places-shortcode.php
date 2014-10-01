@@ -129,7 +129,7 @@ class Pojo_Places_Shortcode {
 				</div>
 			<?php endif; ?>
 
-			<div class="loading" style="display: none;"><?php _e( 'Loading...', 'pojo-places' ); ?></div>
+			<div class="loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
 
 			<ul class="places-list">
 				<?php while ( $places_query->have_posts() ) :
@@ -199,7 +199,7 @@ class Pojo_Places_Shortcode {
 										<?php if ( $country && 'hide' !== $atts['meta_country'] ) : ?>
 											<div class="place-country"><span class="place-label"><?php _e( 'Country', 'pojo-places' ); ?>:</span> <?php echo esc_html( $country ); ?></div>
 										<?php endif; ?>
-										<div class="clearfix"></div>
+										<hr class="clearfix"/>
 										<?php if ( $email && 'hide' !== $atts['meta_email'] ) : ?>
 											<div class="place-email"><span class="place-label"><?php _e( 'Email', 'pojo-places' ); ?>:</span>
 												<a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a></div>
