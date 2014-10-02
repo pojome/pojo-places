@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: pojo-places 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-02 17:25+0300\n"
-"PO-Revision-Date: 2014-10-02 17:59+0200\n"
-"Last-Translator: Yakir Sitbon <kingyes1@gmail.com>\n"
+"PO-Revision-Date: 2014-10-02 18:03+0200\n"
+"Last-Translator: Ariel K <a@arielk.net>\n"
 "Language-Team: LANGUAGE <team@pojo.me>\n"
 "Language: he_IL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.5.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: includes/class-pojo-places-cpt.php:11 includes/class-pojo-places-cpt.php:23
@@ -163,14 +163,12 @@ msgid "Place updated."
 msgstr "מקום עודכן."
 
 #: includes/class-pojo-places-cpt.php:113
-#, fuzzy
 msgid "Custom field updated."
-msgstr "שדות מיוחדות עודכנו"
+msgstr "שדה מיוחד עודכן."
 
 #: includes/class-pojo-places-cpt.php:114
-#, fuzzy
 msgid "Custom field deleted."
-msgstr "שדות מיוחדים נמחקו"
+msgstr "שדה מיוחד נמחק."
 
 #: includes/class-pojo-places-cpt.php:117
 #, php-format
@@ -293,8 +291,8 @@ msgstr "פרטים נוספים"
 #, php-format
 msgid "%s Place"
 msgid_plural "%s Places"
-msgstr[0] "מקום אחד"
-msgstr[1] "%s מקומות"
+msgstr[0] "מקום %s"
+msgstr[1] "%s מקומות "
 
 #: includes/class-pojo-places-settings.php:11
 msgid "Map Language"
