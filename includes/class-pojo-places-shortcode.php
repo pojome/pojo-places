@@ -131,7 +131,7 @@ class Pojo_Places_Shortcode {
 
 			<div class="places-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
 
-			<ul class="places-list">
+			<ul class="places-list hide">
 				<?php while ( $places_query->have_posts() ) :
 					$places_query->the_post();
 
