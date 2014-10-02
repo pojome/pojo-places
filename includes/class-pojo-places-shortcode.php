@@ -242,7 +242,7 @@ class Pojo_Places_Shortcode {
 										<?php endif; ?>
 										<?php if ( 'hide' !== $atts['link_waze'] ) : ?>
 											<div class="goto-waze">
-												<a target="_blank" href="waze://?q=<?php echo urlencode( implode( ', ', $address_line ) ); ?>">
+												<a target="_blank" href="waze://?ll=<?php echo esc_attr( $latitude . ',' . $longitude ); ?>&navigate=yes">
 													<i class="fa fa-car"></i>
 													<?php _e( 'Waze', 'pojo-places' ); ?>
 												</a>
