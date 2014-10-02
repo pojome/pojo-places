@@ -80,8 +80,6 @@ final class Pojo_Places_CPT {
 			'menu_name'         => _x( 'Tags', 'Admin menu name', 'pojo-places' ),
 			'search_items'      => __( 'Search Tags', 'pojo-places' ),
 			'all_items'         => __( 'All Tags', 'pojo-places' ),
-			'parent_item'       => __( 'Parent Tag', 'pojo-places' ),
-			'parent_item_colon' => __( 'Parent Tag:', 'pojo-places' ),
 			'edit_item'         => __( 'Edit Tag', 'pojo-places' ),
 			'update_item'       => __( 'Update Tag', 'pojo-places' ),
 			'add_new_item'      => __( 'Add New Tag', 'pojo-places' ),
