@@ -27,17 +27,9 @@
   padding: 7px;
   color: #AAAAAA;
   -webkit-transition: all 0.3s ease-in-out;
-  /* Firefox */
-
   -moz-transition: all 0.3s ease-in-out;
-  /* WebKit */
-
   -o-transition: all 0.3s ease-in-out;
-  /* Opera */
-
   transition: all 0.3s ease-in-out;
-  /* Standard */
-
 }
 .pojo-places .search-wrap button.share-location:hover {
   color: #289dcc;
@@ -66,30 +58,17 @@
   display: inline-block;
   margin: 0 5px;
 }
-.pojo-places .loading {
+.pojo-places .places-loading {
   text-align: center;
+  margin: 30px auto;
 }
-.pojo-places .loading .fa {
+.pojo-places .places-loading .fa {
   font-size: 4em;
 }
 .pojo-places .places-list {
   padding: 0;
   margin: 0;
   list-style: none;
-  visibility: visible;
-  opacity: 1;
-  -webkit-transition: opacity 2s linear;
-  -moz-transition: opacity 2s linear;
-  -o-transition: opacity 2s linear;
-  transition: opacity 2s linear;
-}
-.pojo-places .places-list.hide {
-  visibility: hidden;
-  opacity: 0;
-  -webkit-transition: visibility 0s 2s, opacity 2s linear;
-  -moz-transition: visibility 0s 2s, opacity 2s linear;
-  -o-transition: visibility 0s 2s, opacity 2s linear;
-  transition: visibility 0s 2s, opacity 2s linear;
 }
 .pojo-places .places-list .place-item {
   margin: 0;
@@ -198,6 +177,9 @@
 @media (max-width: 767px) {
   .pojo-places .places-list .place-item .place-item-body .place-thumbnail {
     display: none;
+  }
+  .pojo-places .places-list .place-item .place-item-body .address-details div {
+    display: block;
   }
   .pojo-places .places-list .place-item .place-item-body .place-details {
     display: block;
