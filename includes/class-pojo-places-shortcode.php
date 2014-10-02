@@ -129,7 +129,7 @@ class Pojo_Places_Shortcode {
 				</div>
 			<?php endif; ?>
 
-			<div class="loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
+			<div class="places-loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i></div>
 
 			<ul class="places-list">
 				<?php while ( $places_query->have_posts() ) :
@@ -159,8 +159,9 @@ class Pojo_Places_Shortcode {
 						array(
 							$address,
 							$city,
-							$state,
-							$zipcode,
+							//$state,
+							//$zipcode,
+							$country,
 						)
 					);
 					
@@ -241,7 +242,7 @@ class Pojo_Places_Shortcode {
 										<?php endif; ?>
 										<?php if ( 'hide' !== $atts['link_waze'] ) : ?>
 											<div class="goto-waze">
-												<a target="_blank" href="waze://?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>">
+												<a target="_blank" href="waze://?q=<?php echo urlencode( implode( ', ', $address_line ) ); ?>">
 													<i class="fa fa-car"></i>
 													<?php _e( 'Waze', 'pojo-places' ); ?>
 												</a>
@@ -249,7 +250,7 @@ class Pojo_Places_Shortcode {
 										<?php endif; ?>
 										<?php if ( 'hide' !== $atts['link_google'] ) : ?>
 											<div class="goto-google-map">
-												<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo urlencode( implode( ',', $address_line ) ); ?>">
+												<a target="_blank" href="https://www.google.com/maps/preview?q=<?php echo urlencode( implode( ', ', $address_line ) ); ?>">
 													<i class="fa fa-map-marker"></i>
 													<?php _e( 'Map', 'pojo-places' ); ?>
 												</a>

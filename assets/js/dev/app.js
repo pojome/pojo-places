@@ -25,7 +25,7 @@
 			this.cache.$places_ul = this.cache.$placesWrap.find( 'ul.places-list' );
 			this.cache.$places = this.cache.$places_ul.find( 'li.place-item' );
 
-			this.cache.$loading = this.cache.$placesWrap.find( 'div.loading' );
+			this.cache.$loading = this.cache.$placesWrap.find( 'div.places-loading' );
 
 			this.cache.$search_wrap = this.cache.$placesWrap.find( 'div.search-wrap' );
 			this.cache.$search_box = this.cache.$search_wrap.find( 'input.search-box' );
@@ -44,6 +44,7 @@
 			self.cache.$placesWrap.find( 'button.get-geolocation-position' ).on( 'click', function() {
 				navigator.geolocation.getCurrentPosition( function( position ) {
 					self.loading.show( self );
+					self.cache.$places_ul.hide();
 
 					self.userLocation = self.google_api.getLocation(
 						position.coords.latitude,
@@ -56,6 +57,7 @@
 								self.cache.$search_box.val( results[0].formatted_address );
 							}
 						}
+						self.cache.$places_ul.show();
 						self.loading.hide( self );
 					} );
 
@@ -72,6 +74,8 @@
 				//location.hash = form_data;
 				
 				$filters.prop( 'disabled', 'disabled' );
+
+				self.cache.$places_ul.hide();
 				
 				self.cache.$places
 					.addClass( 'hide' )
@@ -112,6 +116,8 @@
 
 						$( itemSelector, self.cache.$places_ul ).removeClass( 'hide' );
 
+						self.cache.$places_ul.show();
+						
 						self.loading.hide( self );
 						$filters.removeProp( 'disabled' );
 					}, 500 );
