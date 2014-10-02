@@ -44,8 +44,7 @@
 			self.cache.$placesWrap.find( 'button.get-geolocation-position' ).on( 'click', function() {
 				navigator.geolocation.getCurrentPosition( function( position ) {
 					self.loading.show( self );
-					self.cache.$places_ul.hide();
-
+					
 					self.userLocation = self.google_api.getLocation(
 						position.coords.latitude,
 						position.coords.longitude
@@ -57,7 +56,6 @@
 								self.cache.$search_box.val( results[0].formatted_address );
 							}
 						}
-						self.cache.$places_ul.show();
 						self.loading.hide( self );
 					} );
 
@@ -74,8 +72,6 @@
 				//location.hash = form_data;
 				
 				$filters.prop( 'disabled', 'disabled' );
-
-				self.cache.$places_ul.hide();
 				
 				self.cache.$places
 					.addClass( 'hide' )
@@ -115,8 +111,6 @@
 						}
 
 						$( itemSelector, self.cache.$places_ul ).removeClass( 'hide' );
-
-						self.cache.$places_ul.show();
 						
 						self.loading.hide( self );
 						$filters.removeProp( 'disabled' );
@@ -129,9 +123,11 @@
 		loading: {
 			show: function( self ) {
 				self.cache.$loading.show();
+				self.cache.$places_ul.addClass( 'hide' );
 			},
 			
 			hide: function( self ) {
+				self.cache.$places_ul.removeClass( 'hide' );
 				self.cache.$loading.hide();
 			}
 		},
