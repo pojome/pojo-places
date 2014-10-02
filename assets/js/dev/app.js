@@ -123,11 +123,12 @@
 		loading: {
 			show: function( self ) {
 				self.cache.$loading.show();
-				self.cache.$places_ul.addClass( 'hide' );
+				self.cache.$places_ul.hide();
 			},
 			
 			hide: function( self ) {
-				self.cache.$places_ul.removeClass( 'hide' );
+				//self.cache.$places_ul.removeClass( 'hide' );
+				self.cache.$places_ul.fadeIn( 'slow' );
 				self.cache.$loading.hide();
 			}
 		},
