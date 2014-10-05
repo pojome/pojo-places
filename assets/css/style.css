@@ -31,9 +31,6 @@
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-.pojo-places .search-wrap button.share-location:hover {
-  color: #289dcc;
-}
 .pojo-places .search-wrap button.share-location:before {
   content: '\f05b';
   font-family: fontawesome;
@@ -117,11 +114,11 @@
   width: 50%;
 }
 .pojo-places .places-list .place-item .place-item-body .place-details .extra-details {
-  width: 30%;
+  width: 40%;
   padding: 0 2%;
 }
 .pojo-places .places-list .place-item .place-item-body .place-details .place-go-out {
-  width: 20%;
+  width: 10%;
 }
 .pojo-places .places-list .place-item .place-item-body .address-details div {
   display: inline-block;
@@ -141,10 +138,8 @@
   content: ',';
 }
 .pojo-places .places-list .place-item .place-go-out {
-  display: inline-block;
-  width: 20%;
-  text-align: center;
   font-weight: bold;
+  text-align: center;
 }
 .pojo-places .places-list .place-item .place-go-out .fa {
   display: block;
